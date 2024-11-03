@@ -184,7 +184,8 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"] 
+input[type = "textarea"]{
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -196,7 +197,8 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus
+input[type = "textarea"]:focus {
   border-color: var(--header-color-dark);
 }
 
@@ -211,7 +213,8 @@ input[type="password"]:focus {
 
 .dark-mode input[type="text"],
 .dark-mode input[type="email"],
-.dark-mode input[type="password"] {
+.dark-mode input[type="password"]
+.dark-mode input[type="textarea"] {
   background-color: #333;
   color: white;
   border: 1px solid #666;
@@ -219,7 +222,8 @@ input[type="password"]:focus {
 
 .dark-mode input[type="text"]:focus,
 .dark-mode input[type="email"]:focus,
-.dark-mode input[type="password"]:focus {
+.dark-mode input[type="password"] 
+.dark-mode input[type="textarea"]{
   border-color: var(--header-color-dark);
 }
 
