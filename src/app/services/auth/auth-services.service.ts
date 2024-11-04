@@ -93,4 +93,14 @@ export class AuthServicesService {
     const headers = new HttpHeaders({ Authorization: token });
     return this.http.get(`${this.apiUrl}/user/profile/referral/info?referralCode=${referralCode}`, { headers });
   }
+
+  private apiUrls = 'https://fcsapi.com/api-v3/forex/profile?symbol=XAU/USD&access_key=OFMirVmCdgfldHkJ3V1i' ;
+  private apiurslss = "https://fcsapi.com/api-v3/forex/latest?symbol=XAU/USD&access_key=OFMirVmCdgfldHkJ3V1i" ;
+
+  getLatestForexDetails(): Observable<any> {
+    return this.http.get(this.apiUrls);
+  }
+  getLatestForexLatest(): Observable<any> {
+    return this.http.get(this.apiurslss);
+  }
 }

@@ -124,13 +124,18 @@ export class DashboardComponent {
     });
   }
 
-  copyToClipboard(): void {
-    navigator.clipboard.writeText(this.refferalcode).then(() => {
-      alert('Referral code copied to clipboard!'); // Optional: show a success message
-    }).catch(err => {
-      console.error('Failed to copy: ', err);
-    });
+  copyReferralLink(): void {
+    const referralLink = `${window.location.origin}/signup?referralCode=${this.refferalcode}`;
+    navigator.clipboard.writeText(referralLink)
+      .then(() => {
+        this.toastr.success('Referral link copied to clipboard!');
+      })
+      .catch(err => {
+        console.error('Failed to copy referral link: ', err);
+        this.toastr.error('Failed to copy referral link.');
+      });
   }
+  
 
   applyFilters(): void {
     // Reset current page to 1 when applying new filters

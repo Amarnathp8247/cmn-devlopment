@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServicesService } from '../../../services/auth/auth-services.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -23,7 +23,9 @@ export class SignUpComponent {
     private fb: FormBuilder,
     private authServices: AuthServicesService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+
   ) {
     this.signUpForm = this.fb.group({
       name: ['', Validators.required],
@@ -48,6 +50,12 @@ export class SignUpComponent {
       this.isDarkMode = true;
     }
     this.startTimer();
+    this.route.queryParams.subscribe(params => {
+      const referralCode = params['referralCode'];
+      if (referralCode) {
+        this.signUpForm.controls['referral'].setValue(referralCode);
+      }
+    });
   }
 
   toggleDarkMode(data: boolean) {

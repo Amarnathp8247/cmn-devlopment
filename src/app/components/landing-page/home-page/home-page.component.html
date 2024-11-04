@@ -36,24 +36,100 @@
     </div>
 </nav>
 
-<div class="container-fluid hero-header  py-5 mb-5">
-    <div class="container py-5">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 mb-3 animated slideInDown">Secure Your Future with Gold Investments</h1>
-                <p class="animated slideInDown">TSecure Your Future with Gold Investments" highlights the essential role
-                    of gold in protecting wealth. With Boost Bullion, clients gain access to ethical gold trading,
-                    ensuring a stable foundation for their financial future through trusted investment strategies.</p>
-                <a href="" class="btn  py-3 px-4 animated slideInDown">Explore More</a>
-            </div>
-            <div class="col-lg-6 animated fadeIn">
-                <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;"
-                    src="assets/img/banner-img-1.png" alt="" width="500" height="500">
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <div class="container-fluid hero-header py-5">
+                <div class="container py-5">
+                    <div class="row g-5 align-items-center">
+                        <div class="col-lg-6">
+                            <h1 class="display-4 mb-3 animated slideInDown">Secure Your Future with Gold Investments</h1>
+                            <p class="animated slideInDown">Secure your future with gold investments highlights the essential role
+                                of gold in protecting wealth. With Boost Bullion, clients gain access to ethical gold trading,
+                                ensuring a stable foundation for their financial future through trusted investment strategies.</p>
+                            <a href="#" class="btn btn-primary py-3 px-4 animated slideInDown">Explore More</a>
+                        </div>
+                        <div class="col-lg-6 animated fadeIn">
+                            <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;"
+                                src="assets/img/slider_1.jpg" alt="Gold Investment Image 1">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <div class="container-fluid hero-header py-5">
+                <div class="container py-5">
+                    <div class="row g-5 align-items-center">
+                        <div class="col-lg-6">
+                            <h1 class="display-4 mb-3 animated slideInDown">Invest in Gold for Financial Stability</h1>
+                            <p class="animated slideInDown">Gain stability with Boost Bullion's ethical gold trading. Our clients
+                                enjoy secure, sustainable investments that contribute to a brighter financial future.</p>
+                            <a href="#" class="btn btn-primary py-3 px-4 animated slideInDown">Learn More</a>
+                        </div>
+                        <div class="col-lg-6 animated fadeIn">
+                            <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;"
+                                src="assets/img/slider_3.jpg" alt="Gold Investment Image 2" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Add more slides as needed -->
+    </div>
+
+    <!-- Carousel controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Header End -->
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Pairs</th>
+                <th>Price</th>
+                <th>Bid</th>
+                <th> Ask</th>
+                <th>Change</th>
+                <th>Change %</th>
+                <th>Spread</th>
+                <th>Time</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="forexDetail">
+                <td><img [src]="forexDetail.icon" alt="" width="30"> {{ forexLatest.s }}</td>
+                <td>{{ forexLatest?.c }}</td>
+                <td>{{ forexLatest?.b }}</td>
+                <td>{{ forexLatest?.a }}</td>
+                <td>{{ forexLatest?.ch }}</td>
+                <td>{{ forexLatest?.cp }}</td>
+                <td>{{ forexLatest?.sp }}</td>
+                <td>{{ forexLatest?.tm }}</td>
+                
+              </tr>
+            </tbody>
+          </table>
     </div>
 </div>
-<!-- Header End -->
+  
+  
 
 <!-- Service Start -->
 
@@ -102,7 +178,7 @@
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <img class="img-fluid" src="assets/img/analysis-img.png" alt="" width="500" height="500">
+                <img class="img-fluid" src="assets/img/slider_2.jpg" alt="" width="500" height="500">
             </div>
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="h-100">
@@ -538,29 +614,6 @@
                     <button type="button" class="btn btn-primary py-2 px-3 position-absolute top-0 end-0 mt-2 me-2">Sign Up</button>
                 </div>
             </div>
-            <!-- Contact Info -->
-            <div class="col-lg-4 col-md-6">
-                <h3 class="mb-4">Get In Touch</h3>
-                <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
-            </div>
-            <!-- Services -->
-            <div class="col-lg-3 col-md-6">
-                <h3 class="mb-4">Our Services</h3>
-                <a href="" class="d-block mb-2">Currency Wallet</a>
-                <a href="" class="d-block mb-2">Currency Transaction</a>
-                <a href="" class="d-block mb-2">Bitcoin Investment</a>
-                <a href="" class="d-block mb-2">Token Sale</a>
-            </div>
-            <!-- Quick Links -->
-            <div class="col-lg-3 col-md-6">
-                <h3 class="mb-4">Quick Links</h3>
-                <a href="" class="d-block mb-2">About Us</a>
-                <a href="" class="d-block mb-2">Contact Us</a>
-                <a href="" class="d-block mb-2">Our Services</a>
-                <a href="" class="d-block mb-2">Terms & Conditions</a>
-            </div>
             <!-- Social Media -->
             <div class="col-lg-3 col-md-6">
                 <h3 class="mb-4">Follow Us</h3>
@@ -571,14 +624,11 @@
                     <a href="" class="btn btn-outline-primary rounded-circle me-1"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
+           
+           
         </div>
     </div>
-    <div class="container-fluid copyright">
-        <div class="container text-center">
-            <p>&copy; <a href="#">Your Site Name</a>, All Rights Reserved.</p>
-            <p>Designed by <a href="https://htmlcodex.com">HTML Codex</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a></p>
-        </div>
-    </div>
+   
 </div>
 
 <!-- Footer End -->
