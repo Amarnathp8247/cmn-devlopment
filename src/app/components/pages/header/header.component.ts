@@ -48,10 +48,17 @@ export class HeaderComponent {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark-mode');
       this.isDarkMode = true;
+      this.updateIframeTheme('dark');
+    } else {
+      this.updateIframeTheme('light');
     }
   }
+  
 
- 
+  updateIframeTheme(theme: string) {
+    const iframe = document.getElementById('fx-iframe') as HTMLIFrameElement;
+    iframe.src = `https://fxpricing.com/fx-widget/technical-indicator-widget.php?id=1984&pair_weight=normal&click_target=blank&theme=${theme}&tm-cr=FFFFFF&hr-cr=00000013&by-cr=28A745&sl-cr=DC3545&flags=circle&value_alignment=center&tab=5M,15M,30M,1D&lang=en&font=Arial, sans-serif`;
+  }
 
 
 

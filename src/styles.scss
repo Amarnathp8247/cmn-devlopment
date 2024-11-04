@@ -460,3 +460,29 @@ input[type = "textarea"]:focus {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.fcs-brand{
+ display: none !important;
+}
+#fx-pricing-widget-copyright{
+  display: none;
+}
+
+.fcs-link{
+  display: none !important;
+}
+
+
+
+/* Dark mode styling for iframe wrapper */
+.iframe-container {
+  background-color: #121212 !important; /* Dark background for iframe */
+  padding: 10px; /* Space around the iframe */
+  border-radius: 8px;
+}
+
+/* Applying the dark mode effect */
+.dark-mode .iframe-container iframe {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9);
+  border: none; /* Hide iframe borders */
+}
