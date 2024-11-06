@@ -36,7 +36,7 @@ const routes: Routes = [
       { path: 'transaction', loadChildren: () => import('./components/pages/transaction/transaction.module').then(m => m.TransactionModule), canActivate: [AuthGuard] },
       { path: 'wallet', loadChildren: () => import('./components/pages/wallet/wallet.module').then(m => m.WalletModule), canActivate: [AuthGuard] },
       { path: 'setting', loadChildren: () => import('./components/pages/setting/setting.module').then(m => m.SettingModule), canActivate: [AuthGuard] },
-      { path: 'tree-list', loadChildren: () => import('./components/pages/tree-list/tree-list.module').then(m => m.TreeListModule) },
+      { path: 'reffral-list', loadChildren: () => import('./components/pages/tree-list/tree-list.module').then(m => m.TreeListModule) },
       { path: 'deposit', loadChildren: () => import('./components/pages/deposit/deposit.module').then(m => m.DepositModule) },
       { path: 'withdraw', loadChildren: () => import('./components/pages/withdraw/withdraw.module').then(m => m.WithdrawModule) },
       { path: 'fund-transfer', loadChildren: () => import('./components/pages/fund-transfer/fund-transfer.module').then(m => m.FundTransferModule) },

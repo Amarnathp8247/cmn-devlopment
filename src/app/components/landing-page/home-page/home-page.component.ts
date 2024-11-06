@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartData, ChartOptions } from 'chart.js';
+
 import { AuthServicesService } from 'src/app/services/auth/auth-services.service';
 
 @Component({

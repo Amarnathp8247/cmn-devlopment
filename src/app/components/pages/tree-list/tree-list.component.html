@@ -31,7 +31,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let referral of filteredReferrals">
+                                    <tr *ngFor="let referral of filteredReferrals | filter:searchQuery">
                                         <td>{{ referral?.date }}</td>
                                         <td>{{ referral?.referralCode }}</td>
                                         <td>{{ referral?.name }}</td>
