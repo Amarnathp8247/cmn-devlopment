@@ -13,6 +13,7 @@ import { TransactionModule } from './components/pages/transaction/transaction.mo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
+import { TradeRoomComponent } from './components/pages/trade-room/trade-room.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { HomePageComponent } from './components/landing-page/home-page/home-page
     SignUpComponent,
     ProfilePageComponent,
     HomePageComponent,
+    TradeRoomComponent,
   
     
   ],

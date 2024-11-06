@@ -6,6 +6,7 @@ import { SideBarComponent } from './components/pages/side-bar/side-bar.component
 import { ProfilePageComponent } from './components/pages/profile-page/profile-page.component';
 import { AuthGuard } from './auth/auth.guard';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
+import { TradeRoomComponent } from './components/pages/trade-room/trade-room.component';
 
 const routes: Routes = [
   // {
@@ -25,6 +26,7 @@ const routes: Routes = [
     path: 'signup',
     component: SignUpComponent
   },
+ 
   {
     path: '',
     component: SideBarComponent,
@@ -40,7 +42,10 @@ const routes: Routes = [
       { path: 'fund-transfer', loadChildren: () => import('./components/pages/fund-transfer/fund-transfer.module').then(m => m.FundTransferModule) },
       { path: 'bonding', loadChildren: () => import('./components/pages/bonding/bonding.module').then(m => m.BondingModule) },
       { path: 'support', loadChildren: () => import('./components/pages/support/support.module').then(m => m.SupportModule) },
- 
+      {
+        path: 'trade-room',
+        component: TradeRoomComponent
+      },
 
       // Add other protected routes here
     ]

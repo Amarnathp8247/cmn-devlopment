@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <form [formGroup]="stakeForm" (ngSubmit)="stake()">
                             <div class="form-group mb-3">
-                                <label for="stakeAmount">Amount to Stake:</label>
+                                <label for="stakeAmount">Amount to Bond</label>
                                 <input type="number" id="stakeAmount" class="form-control" formControlName="amount"
                                     required />
                                 <div *ngIf="stakeForm.get('amount')?.invalid && (stakeForm.get('amount')?.touched || stakeForm.get('amount')?.dirty)"
