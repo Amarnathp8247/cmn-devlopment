@@ -5,7 +5,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { HeaderComponent } from '../header/header.component';
 import { SideBarComponent } from '../side-bar/side-bar.component';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,10 @@ import { SideBarComponent } from '../side-bar/side-bar.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    MatPaginatorModule,
+    FormsModule,
+    
   ]
 })
 export class DashboardModule { }
