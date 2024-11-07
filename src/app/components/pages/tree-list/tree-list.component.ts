@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServicesService } from 'src/app/services/auth/auth-services.service';
 
@@ -9,7 +9,10 @@ import { AuthServicesService } from 'src/app/services/auth/auth-services.service
   styleUrls: ['./tree-list.component.scss']
 })
 export class TreeListComponent implements OnInit {
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  public currentPage: number = 1;
+  public itemPerPage: number = 10;
+  pagelength: any;
   loading = false;
   isDarkMode: boolean = false;
   token: any;
@@ -17,7 +20,6 @@ export class TreeListComponent implements OnInit {
   filteredReferrals: any[] = [];
   searchQuery: string = '';
   pageSize: number = 10;
-  currentPage: number = 1;
   selectedReferral: any   // Store selected referral for the modal
 
 
@@ -36,13 +38,16 @@ export class TreeListComponent implements OnInit {
     this.authService.getReferralTree(this.token).subscribe({
       next: (response: any) => {
         this.referralTree = response.data; // Adjust this according to actual API response
+        this.pagelength = this.referralTree.length;
         this.filterReferrals();
+        this.localPagination()
         this.loading = false;
       },
       error: (err) => {
         console.error('Failed to fetch referral tree', err);
         this.toastr.error('Failed to fetch referral data');
         this.loading = false;
+        this.pagelength = 0;
       }
     });
   }
@@ -56,6 +61,7 @@ export class TreeListComponent implements OnInit {
       referral.mobile.toLowerCase().includes(query)
     );
   }
+  
   getReferralInfo(referralCode: string): void {
     this.authService.getReferralInfomation(referralCode, this.token).subscribe({
       next: (response: any) => {
@@ -76,10 +82,21 @@ export class TreeListComponent implements OnInit {
     this.currentPage = 1; // Reset to first page on new search
   }
 
-  onPageChange(event: PageEvent): void {
-    this.currentPage = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
-    this.pageSize = event.pageSize;
+  // onPageChange(event: PageEvent): void {
+  //   this.currentPage = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
+  //   this.pageSize = event.pageSize;
+  // }
+
+  onPageChange($event: any) {
+    this.currentPage = $event.pageIndex + 1;
+    if (this.itemPerPage !== $event.pageSize) {
+      this.itemPerPage = $event.pageSize;
+    }
+    this.localPagination()
   }
-
-
+  localPagination() {
+    let toPage = this.itemPerPage * this.currentPage;
+    let fromPage = toPage - this.itemPerPage;
+    this.filteredReferrals = this.referralTree.slice(fromPage, toPage);
+  }
 }

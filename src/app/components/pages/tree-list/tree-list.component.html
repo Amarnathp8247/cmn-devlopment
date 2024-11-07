@@ -45,8 +45,12 @@
 
                         </div>
 
-                        <mat-paginator class="pagination" [length]="filteredReferrals.length" [pageSize]="10"
-                            [pageSizeOptions]="[5, 10, 25]" (page)="onPageChange($event)"></mat-paginator>
+                        <!-- <mat-paginator class="pagination" [length]="filteredReferrals.length" [pageSize]="10"
+                            [pageSizeOptions]="[5, 10, 25]" (page)="onPageChange($event)"></mat-paginator> -->
+
+                            <mat-paginator #paginator [length]="pagelength" [pageSize]="itemPerPage" showFirstLastButtons="true"
+                            aria-label="Select page" [pageSizeOptions]="[10, 25, 50]" (page)="onPageChange($event)">
+                          </mat-paginator>
 
                         <p *ngIf="filteredReferrals.length === 0" class="text-center">No referrals found.</p>
                     </div>
