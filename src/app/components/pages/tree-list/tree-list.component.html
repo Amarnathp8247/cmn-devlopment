@@ -12,9 +12,10 @@
 
                             <!-- Search Input -->
                             <div class="form-group mb-3 w-25">
-                                <input type="text" class="form-control "
+                                <!-- <input type="text" class="form-control "
                                     style="background-color: aliceblue !important;  color: black;" placeholder="Search "
-                                    [(ngModel)]="searchQuery" (ngModelChange)="filterReferrals()" />
+                                    [(ngModel)]="searchQuery" (ngModelChange)="filterReferrals()" /> -->
+                                    <input class="report-search-bttn" type="text" placeholder="Search..." [(ngModel)]="searchTerm" (keyup)="filterReferrals()" />
                             </div>
 
                         </div>
@@ -31,7 +32,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let referral of filteredReferrals | filter:searchQuery">
+                                    <tr *ngFor="let referral of filteredReferrals ">
                                         <td>{{ referral?.date }}</td>
                                         <td>{{ referral?.referralCode }}</td>
                                         <td>{{ referral?.name }}</td>
@@ -45,8 +46,12 @@
 
                         </div>
 
-                        <mat-paginator class="pagination" [length]="filteredReferrals.length" [pageSize]="10"
-                            [pageSizeOptions]="[5, 10, 25]" (page)="onPageChange($event)"></mat-paginator>
+                        <!-- <mat-paginator class="pagination" [length]="filteredReferrals.length" [pageSize]="10"
+                            [pageSizeOptions]="[5, 10, 25]" (page)="onPageChange($event)"></mat-paginator> -->
+
+                            <mat-paginator #paginator [length]="pagelength" [pageSize]="itemPerPage" showFirstLastButtons="true"
+                            aria-label="Select page" [pageSizeOptions]="[10, 25, 50]" (page)="onPageChange($event)">
+                          </mat-paginator>
 
                         <p *ngIf="filteredReferrals.length === 0" class="text-center">No referrals found.</p>
                     </div>
