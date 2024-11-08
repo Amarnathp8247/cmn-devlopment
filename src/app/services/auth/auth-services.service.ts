@@ -25,6 +25,12 @@ export class AuthServicesService {
     return this.http.post(`${this.apiUrl}/user/auth/login`, userData, { headers });
   }
 
+  forgotPassword(body: string , token:any): Observable<any> {
+    const headers = new HttpHeaders({ 'Authorization': token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.put<any>(`${this.apiUrl}/user/auth/change/password`, { body } , {headers});
+  }
+
+
   // Method to send OTP to email
   sendEmailOtp(email: string, mobile: string): Observable<any> {
     const body = { email, mobile };

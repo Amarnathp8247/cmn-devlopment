@@ -41,6 +41,22 @@ export class WalletServiceService {
       );
   }
 
+   // New verifyTransactionHash method
+   verifyTransactionHash(transactionHash: string, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': token,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    const body = new URLSearchParams();
+    body.set('transactionHash', transactionHash);
+
+    return this.http.post(`${this.baseUrl}/user/wallet/verify/transactionhash`, body.toString(), {
+      headers,
+      observe: 'response'
+    });
+  }
+
   convertWalletFormData( token: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', token);
 
