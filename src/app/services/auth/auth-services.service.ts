@@ -92,7 +92,7 @@ export class AuthServicesService {
    
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this.http.get<any>(`${this.apiUrl}/user/profile/referral/tree`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/user/profile/referral/list`, { headers });
   }
 
   getReferralInfomation(referralCode: string, token: string): Observable<any> {
