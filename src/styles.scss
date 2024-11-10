@@ -48,6 +48,19 @@ p {
   color: var(--text-color);
 }
 
+.list-group-item {
+  background-color: var(--card-bg-color) !important;
+  color: var(--text-color);
+  border: none !important;
+  padding: 1rem;
+}
+.p-tree {
+  background-color: var(--card-bg-color) !important;
+}
+.p-checkbox-box{
+  display: none !important;
+}
+
 h1,
 h2,
 h3,
@@ -70,7 +83,7 @@ h6 {
 }
 
 button {
-  background-color: var(--button-bg-color);
+  background-color: var(--border-color-dark);
   color: var(--button-text-color);
   border: none;
   padding: 10px 20px;

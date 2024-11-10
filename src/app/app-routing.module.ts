@@ -42,6 +42,8 @@ const routes: Routes = [
       { path: 'fund-transfer', loadChildren: () => import('./components/pages/fund-transfer/fund-transfer.module').then(m => m.FundTransferModule) },
       { path: 'bonding', loadChildren: () => import('./components/pages/bonding/bonding.module').then(m => m.BondingModule) },
       { path: 'support', loadChildren: () => import('./components/pages/support/support.module').then(m => m.SupportModule) },
+      { path: 'network-tree', loadChildren: () => import('./components/pages/network-tree/network-tree.module').then(m => m.NetworkTreeModule) },
+  
       {
         path: 'trade-room',
         component: TradeRoomComponent

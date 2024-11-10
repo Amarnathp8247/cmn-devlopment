@@ -22,6 +22,7 @@ import { TradeRoomComponent } from './components/pages/trade-room/trade-room.com
     ProfilePageComponent,
     HomePageComponent,
     TradeRoomComponent,
+    
   
     
   ],

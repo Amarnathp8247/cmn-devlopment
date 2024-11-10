@@ -109,4 +109,9 @@ export class AuthServicesService {
   getLatestForexLatest(): Observable<any> {
     return this.http.get(this.apiurslss);
   }
+
+  getReferralList(token:any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', token);
+    return this.http.get(`${this.apiUrl}/user/profile/referral/tree`, { headers });
+  }
 }
