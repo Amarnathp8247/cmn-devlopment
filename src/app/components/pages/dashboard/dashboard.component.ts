@@ -55,29 +55,7 @@ export class DashboardComponent {
   }
 
 
-  ngAfterViewInit(): void {
-    this.loadTradingViewScript();
-  }
-
-  loadTradingViewScript(): void {
-    const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-      autosize: true,
-      symbol: 'NASDAQ:AAPL',
-      interval: 'D',
-      timezone: 'Etc/UTC',
-      theme: 'light',
-      style: '1',
-      locale: 'en',
-      allow_symbol_change: true,
-      calendar: false,
-      support_host: 'https://www.tradingview.com'
-    });
-    document.querySelector('.tradingview-widget-container__widget')?.appendChild(script);
-  }
-
+  
 
   getProfileInfo(): void {
     this.loading = true;
