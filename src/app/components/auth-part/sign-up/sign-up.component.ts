@@ -13,12 +13,14 @@ export class SignUpComponent {
   signUpForm: any;
   otpForm: any;  // Add an OTP form for user input
   isOtpSent: boolean = false; // Track if OTP has been sent
-  isDarkMode: boolean = false;  
-  isPasswordVisible: boolean = false;  
-  referralName:any = '';
+  isDarkMode: boolean = false;
+  isPasswordVisible: boolean = false;
+  referralName: any = '';
   timer: number = 60;
   resendEnabled: boolean = false;
   interval: any;
+  loginId: any
+  loginIdData: any
   constructor(
     private fb: FormBuilder,
     private authServices: AuthServicesService,
@@ -45,6 +47,7 @@ export class SignUpComponent {
 
   ngOnInit() {
     const theme = localStorage.getItem('theme');
+    this.loginIdData = localStorage.getItem('loginId')
     if (theme === 'dark') {
       document.documentElement.classList.add('dark-mode');
       this.isDarkMode = true;
@@ -60,7 +63,7 @@ export class SignUpComponent {
 
   toggleDarkMode(data: boolean) {
     this.isDarkMode = !this.isDarkMode;
-    const rootElement = document.documentElement; 
+    const rootElement = document.documentElement;
     if (data) {
       rootElement.classList.add('dark-mode');
       localStorage.setItem('theme', 'dark');
@@ -90,11 +93,12 @@ export class SignUpComponent {
   onSubmit() {
     if (this.signUpForm.valid) {
       const userData = this.signUpForm.value;
-  
+
       this.authServices.signUp(userData).subscribe({
         next: (response: any) => {
 
-          this.referralName = response.data.email
+          this.loginId = localStorage.setItem("loginId", response.data.userData.loginId); // Store loginId from response
+         
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',
@@ -104,7 +108,7 @@ export class SignUpComponent {
           });
           this.sendOtp(userData.mobile, userData.email); // Send OTP after successful signup
         },
-        
+
         error: (err) => {
           const errorMessage = err.error?.message || 'Something went wrong';
           this.toastr.error(errorMessage, '', {
@@ -126,7 +130,7 @@ export class SignUpComponent {
       });
     }
   }
-  
+
 
   sendOtp(mobile: string, email: string) {
     this.authServices.sendEmailOtp(email, mobile).subscribe({
@@ -178,7 +182,7 @@ export class SignUpComponent {
           timeOut: 3000,
           progressBar: true
         });
-        
+
       }
     });
   }
@@ -206,18 +210,18 @@ export class SignUpComponent {
           timeOut: 3000,
           progressBar: true
         });
-        
+
       }
     });
   }
 
   checkReferralCode() {
-    
+
     const referralCode = this.signUpForm.get('referral')?.value;
     this.authServices.getReferralInfo(referralCode).subscribe({
       next: (response: any) => {
         if (response.status) {
-          this.referralName = response.data.email
+          this.referralName = response.data.name
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',
@@ -234,12 +238,12 @@ export class SignUpComponent {
             timeOut: 3000,
             progressBar: true
           });
-          
+
         }
       },
       error: (err) => {
         const errorMessage = err.error?.message || 'Error validating referral code';
-        
+
         this.toastr.error(errorMessage, '', {
           toastClass: 'toast-custom toast-error',
           positionClass: 'toast-bottom-center',
@@ -247,8 +251,31 @@ export class SignUpComponent {
           timeOut: 3000,
           progressBar: true
         });
-        
+
       }
     });
+  }
+
+  copyLoginId() {
+    if (this.loginIdData) {
+      navigator.clipboard.writeText(this.loginIdData).then(() => {
+        this.toastr.success('Login ID copied to clipboard', '', {
+          toastClass: 'toast-custom toast-success',
+          positionClass: 'toast-bottom-center',
+          closeButton: false,
+          timeOut: 3000,
+          progressBar: true
+        });
+        this.loginIdData = null; // Hide loginId after copying
+      }).catch(() => {
+        this.toastr.error('Failed to copy Login ID', '', {
+          toastClass: 'toast-custom toast-error',
+          positionClass: 'toast-bottom-center',
+          closeButton: false,
+          timeOut: 3000,
+          progressBar: true
+        });
+      });
+    }
   }
 }

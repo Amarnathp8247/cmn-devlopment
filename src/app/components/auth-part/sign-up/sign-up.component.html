@@ -37,6 +37,15 @@
                 <!-- Sign-Up Header -->
                 <div *ngIf="!isOtpSent">
                     <h2 class="text-center mb-4">Sign Up</h2>
+                    <div *ngIf="loginIdData" class="login-id-container">
+                        
+                        <h3>
+                            Login ID:
+                            <strong class="mx-1 text-success">{{ loginIdData }}</strong>
+                            <i class="fas fa-copy text-primary cursor-pointer" (click)="copyLoginId()"
+                                title="Copy to clipboard"></i>
+                        </h3>
+                      </div>
                     <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
                         <!-- Full Name Input -->

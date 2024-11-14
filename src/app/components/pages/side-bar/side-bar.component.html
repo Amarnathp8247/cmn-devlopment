@@ -6,12 +6,12 @@
     <ul class="list-unstyled components cursor-pointer">
       <!-- Dashboard -->
       <li>
-        <a routerLink="/dashboard">
+        <a routerLink="/dashboard" routerLinkActive="active-link">
           <i class="fas fa-tachometer-alt"></i> Dashboard
         </a>
       </li>
       <li>
-        <a routerLink="/trade-room">
+        <a routerLink="/trade-room" routerLinkActive="active-link">
           <i class="fas fa-chart-line"></i> Trade Room
         </a>
       </li>
@@ -23,8 +23,8 @@
         </span>
         <div class="collapse" id="networkSubmenu" data-bs-parent="#sidebar">
           <ul class="list-unstyled ps-4">
-            <li><a routerLink="/reffral-list"><i class="fas fa-network-wired"></i> Network List</a></li>
-            <li><a routerLink="/network-tree"><i class="fas fa-sitemap"></i> Network Tree</a></li>
+            <li><a routerLink="/reffral-list" routerLinkActive="active-link"><i class="fas fa-network-wired"></i> Network List</a></li>
+            <li><a routerLink="/network-tree" routerLinkActive="active-link"><i class="fas fa-sitemap"></i> Network Tree</a></li>
            
           </ul>
         </div>
@@ -42,10 +42,10 @@
         </span>
         <div class="collapse" id="walletSubmenu" data-bs-parent="#sidebar">
           <ul class="list-unstyled ps-4">
-            <li><a routerLink="/deposit"><i class="fas fa-arrow-down"></i> Deposit</a></li>
-            <li><a routerLink="/withdraw"><i class="fas fa-arrow-up"></i> Withdraw</a></li>
-            <li><a routerLink="/fund-transfer"><i class="fas fa-exchange-alt"></i> Fund Transfer</a></li>
-            <li><a routerLink="/wallet"><i class="fas fa-wallet"></i> Convert Wallet</a></li>
+            <li><a routerLink="/deposit" routerLinkActive="active-link"><i class="fas fa-arrow-down"></i> Deposit</a></li>
+            <li><a routerLink="/withdraw" routerLinkActive="active-link"><i class="fas fa-arrow-up"></i> Withdraw</a></li>
+            <li><a routerLink="/fund-transfer" routerLinkActive="active-link"><i class="fas fa-exchange-alt"></i> Fund Transfer</a></li>
+            <li><a routerLink="/wallet" routerLinkActive="active-link"><i class="fas fa-wallet"></i> Convert Wallet</a></li>
           </ul>
         </div>
       </li>
@@ -62,8 +62,8 @@
         </span>
         <div class="collapse" id="settingsSubmenu" data-bs-parent="#sidebar">
           <ul class="list-unstyled ps-4">
-            <li><a routerLink="/profile"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a routerLink="/setting"><i class="fas fa-shield-alt"></i> Security</a></li>
+            <li><a routerLink="/profile" routerLinkActive="active-link"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a routerLink="/setting" routerLinkActive="active-link"><i class="fas fa-shield-alt"></i> Security</a></li>
           </ul>
         </div>
       </li>
@@ -76,7 +76,7 @@
       <!-- Logout -->
       <li>
         <a (click)="logout()">
-          <i class="fas fa-sign-out-alt"></i> Logout
+          <i class="fas fa-sign-out-alt" routerLinkActive="active-link"></i> Logout
         </a>
       </li>
     </ul>

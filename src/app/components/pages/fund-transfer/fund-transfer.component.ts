@@ -84,7 +84,7 @@ export class FundTransferComponent {
     this.authServices.getReferralInfo(referralCode).subscribe({
       next: (response: any) => {
         if (response.status) {
-          this.referralName = response.data.email
+          this.referralName = response.data.name
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',

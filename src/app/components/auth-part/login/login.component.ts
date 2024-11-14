@@ -27,7 +27,7 @@ token:any
   ) {
     // Initialize the login form with validation
     this.loginForm = this.fb.group({
-      mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      loginId: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
