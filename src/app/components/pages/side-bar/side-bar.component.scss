@@ -21,4 +21,14 @@
   #sidebar .cursor-pointer {
     cursor: pointer;
   }
+
+
+  #sidebar {
+    transition: all 0.3s ease;
+    width: 250px;
+  }
+  
+  #sidebar.collapsed {
+    width: 0px;
+  }
   
