@@ -32,7 +32,7 @@ export class SignUpComponent {
     this.signUpForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      mobile: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       cnfPassword: ['', Validators.required],
       referral: ['', Validators.required],
@@ -157,6 +157,21 @@ export class SignUpComponent {
       }
     });
   }
+
+
+copyLoginIdLink(){
+
+  navigator.clipboard.writeText(this.loginIdData)
+  .then(() => {
+    this.toastr.success('LoginId link copied to clipboard!');
+  })
+  .catch(err => {
+    console.error('Failed to copy loginId link: ', err);
+    this.toastr.error('Failed to copy loginId link.');
+  });
+
+  
+}
 
   mobileVerifyOtp() {
     const otpValue = this.otpForm.value.otp;

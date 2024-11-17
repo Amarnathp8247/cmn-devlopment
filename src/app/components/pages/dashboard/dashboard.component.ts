@@ -25,6 +25,7 @@ export class DashboardComponent {
   totalRewardBalance: any = 0
   avaliableRewards: any = 0
   refferalcode: any = ''
+  loginId:any
   bondBalance: any = ''
   totalCredited: number = 0;
   totalDebited: number = 0;
@@ -73,6 +74,7 @@ export class DashboardComponent {
         this.bondBalance = response.data.totalStakingRewardBalance
         // this.bondBalance = response.data.totalReferralRewardBalance
         this.refferalcode = response.data.referralCode
+        this.loginId =  response.data.loginId
         this.avaliableRewards = response.data.totalRewardBalance - this.totalUnlockRewardBalnce
         localStorage.setItem('balance', this.avaliableRewards)
         localStorage.setItem('isTrxPassCreated', response.data.isTrxPassCreated)
@@ -136,6 +138,21 @@ export class DashboardComponent {
         this.toastr.error('Failed to copy referral link.');
       });
   }
+
+copyLoginIdLink(){
+
+  navigator.clipboard.writeText(this.loginId)
+  .then(() => {
+    this.toastr.success('LoginId link copied to clipboard!');
+  })
+  .catch(err => {
+    console.error('Failed to copy loginId link: ', err);
+    this.toastr.error('Failed to copy loginId link.');
+  });
+
+  
+}
+
   
 
   applyFilters(): void {
