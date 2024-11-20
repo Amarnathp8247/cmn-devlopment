@@ -75,10 +75,9 @@ export class WalletServiceService {
     // Convert the object to URL-encoded format
     const body = new URLSearchParams();
     body.set('amount', depositData.amount);
-    body.set('referralCode', depositData.referralCode);
     body.set('password', depositData.password);
 
-    return this.http.post(`${this.baseUrl}/user/wallet/transfer`, body.toString(), { headers });
+    return this.http.post(`${this.baseUrl}/user/wallet/swap`, body.toString(), { headers });
   }
 
 

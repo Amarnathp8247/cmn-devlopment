@@ -45,9 +45,9 @@ export class SideBarComponent {
   }
 
   logout(): void {
-    localStorage.removeItem('authToken'); // Retrieve token from local storage
-    
-      this.router.navigate(['/login']); // Redirect to login if token is not found
-    
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+  });
   }
 }

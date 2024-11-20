@@ -34,7 +34,6 @@ export class SwapPageComponent {
     // Initialize the form groups in the constructor
     this.fundTransferForm = this.fb.group({
       amount: [0, [Validators.required, Validators.min(1)]],
-      referralCode: ['', Validators.required], // Add referral code control
       password: ['', Validators.required], // Add password control
     });
   }
@@ -46,14 +45,10 @@ export class SwapPageComponent {
   }
 
 getUserData(){
-
   this.authServices.getProfile(this.token).subscribe({
     next: (response) => {
-      
-
       this.userBlance = response.data.BUSDBalance
       this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
-      
     },
     error: (error) => {
       this.toastr.error('Failed to load profile information', 'Error');
@@ -66,14 +61,11 @@ getUserData(){
     if (this.fundTransferForm.valid) {
       const depositFormData = {
         amount: this.fundTransferForm.value.amount,
-        referralCode: this.fundTransferForm.value.referralCode,
         password: this.fundTransferForm.value.password
       };
 
       this.walletService.fundTransferData(depositFormData, this.token).subscribe({
-        next: (response) => {
-      
-          
+        next: (response) => {  
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',
@@ -81,8 +73,8 @@ getUserData(){
             timeOut: 3000,
             progressBar: true
           });
-
           this.fundTransferForm.reset()
+          this.getUserData()
         },
         error: (err) => {
           const errorMessage = err.error?.message || 'Error processing the transaction';
@@ -97,50 +89,6 @@ getUserData(){
       });
     }
   }
-
-  checkReferralCode() {
-    
-    const referralCode = this.fundTransferForm.get('referralCode')?.value;
-    this.authServices.getReferralInfo(referralCode).subscribe({
-      next: (response: any) => {
-        if (response.status) {
-          this.referralName = response.data.name
-          this.toastr.success(response.message, '', {
-            toastClass: 'toast-custom toast-success',
-            positionClass: 'toast-bottom-center',
-            closeButton: false,
-            timeOut: 3000,
-            progressBar: true
-          });
-          // this.fundTransferForm.reset()
-          // this.fetchWalletTransactions(this.page, this.sizePerPage)
-          // Handle success, e.g., display referral data or store it for further use
-        } else {
-          this.toastr.error(response.message, '', {
-            toastClass: 'toast-custom toast-error',
-            positionClass: 'toast-bottom-center',
-            closeButton: false,
-            timeOut: 3000,
-            progressBar: true
-          });
-          
-        }
-      },
-      error: (err) => {
-        const errorMessage = err.error?.message || 'Error validating referral code';
-        
-        this.toastr.error(errorMessage, '', {
-          toastClass: 'toast-custom toast-error',
-          positionClass: 'toast-bottom-center',
-          closeButton: false,
-          timeOut: 3000,
-          progressBar: true
-        });
-        
-      }
-    });
-  }
-
   // fetchWalletTransactions(page: number, sizePerPage: number) {
   //   if (this.token) {
   //     this.walletService.getWalletTransactions(page, sizePerPage, this.transactionType, this.token).subscribe({
