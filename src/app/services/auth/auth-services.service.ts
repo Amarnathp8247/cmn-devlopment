@@ -25,6 +25,12 @@ export class AuthServicesService {
     return this.http.post(`${this.apiUrl}/user/auth/login`, userData, { headers });
   }
 
+  forgotPassword(body: string , token:any): Observable<any> {
+    const headers = new HttpHeaders({ 'Authorization': token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.put<any>(`${this.apiUrl}/user/auth/change/password`, { body } , {headers});
+  }
+
+
   // Method to send OTP to email
   sendEmailOtp(email: string, mobile: string): Observable<any> {
     const body = { email, mobile };
@@ -86,7 +92,7 @@ export class AuthServicesService {
    
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this.http.get<any>(`${this.apiUrl}/user/profile/referral/tree`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/user/profile/referral/list`, { headers });
   }
 
   getReferralInfomation(referralCode: string, token: string): Observable<any> {
@@ -102,5 +108,10 @@ export class AuthServicesService {
   }
   getLatestForexLatest(): Observable<any> {
     return this.http.get(this.apiurslss);
+  }
+
+  getReferralList(token:any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', token);
+    return this.http.get(`${this.apiUrl}/user/profile/referral/tree`, { headers });
   }
 }

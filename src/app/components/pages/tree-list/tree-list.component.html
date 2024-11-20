@@ -1,13 +1,14 @@
 <div class="wrapper">
     <div id="content">
         <div class="container">
-            <h2>Referral Data</h2>
+            <h2>Referral List</h2>
             <div class="row justify-content-center">
                 <div class="col-md-10 col-sm-10">
                     <!-- Referral Tree Table -->
                     <div class="mt-4">
                         <div class="d-flex justify-content-between">
 
+                         
 
 
                             <!-- Search Input -->
@@ -50,7 +51,7 @@
                             [pageSizeOptions]="[5, 10, 25]" (page)="onPageChange($event)"></mat-paginator> -->
 
                             <mat-paginator #paginator [length]="pagelength" [pageSize]="itemPerPage" showFirstLastButtons="true"
-                            aria-label="Select page" [pageSizeOptions]="[10, 25, 50]" (page)="onPageChange($event)">
+                            aria-label="Select page" [pageSizeOptions]="[10, 25, 50]" (page)="onPageChange($event)" class="pagination" >
                           </mat-paginator>
 
                         <p *ngIf="filteredReferrals.length === 0" class="text-center">No referrals found.</p>

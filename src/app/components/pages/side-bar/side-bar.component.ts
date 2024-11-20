@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,6 +22,25 @@ export class SideBarComponent {
       document.body.classList.add('dark-mode');
     } else {
       document.body.classList.remove('dark-mode');
+    }
+  }
+
+  // Reference to the sidebar element
+  @ViewChild('sidebar', { static: false }) sidebar: ElementRef | undefined;
+
+  // Reference to the button element
+  @ViewChild('toggleButton', { static: false }) toggleButton: ElementRef | undefined;
+
+  
+
+  // Close sidebar if click happens outside of it
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: MouseEvent) {
+    if (
+      this.sidebar &&
+      !this.sidebar.nativeElement.contains(event.target) 
+    ) {
+      this.isSidebarCollapsed = false;
     }
   }
 

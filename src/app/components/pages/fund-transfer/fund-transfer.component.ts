@@ -39,7 +39,7 @@ export class FundTransferComponent {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('authToken');
-    this.fetchWalletTransactions(this.page, this.sizePerPage);
+    // this.fetchWalletTransactions(this.page, this.sizePerPage);
   }
 
   fundTransfer() {
@@ -84,7 +84,7 @@ export class FundTransferComponent {
     this.authServices.getReferralInfo(referralCode).subscribe({
       next: (response: any) => {
         if (response.status) {
-          this.referralName = response.data.email
+          this.referralName = response.data.name
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',
@@ -92,8 +92,8 @@ export class FundTransferComponent {
             timeOut: 3000,
             progressBar: true
           });
-          this.fundTransferForm.reset()
-          this.fetchWalletTransactions(this.page, this.sizePerPage)
+          // this.fundTransferForm.reset()
+          // this.fetchWalletTransactions(this.page, this.sizePerPage)
           // Handle success, e.g., display referral data or store it for further use
         } else {
           this.toastr.error(response.message, '', {
@@ -121,24 +121,24 @@ export class FundTransferComponent {
     });
   }
 
-  fetchWalletTransactions(page: number, sizePerPage: number) {
-    if (this.token) {
-      this.walletService.getWalletTransactions(page, sizePerPage, this.transactionType, this.token).subscribe({
-        next: (response) => {
-          this.transactions = response.data.docs; // Adjust based on your response structure
-          this.totalTransactions = response.total; // Assuming your response contains the total transaction count
-          console.log(this.transactions);
-        },
-        error: (error) => {
-          console.error('Error fetching wallet transactions:', error);
-        }
-      });
-    }
-  }
+  // fetchWalletTransactions(page: number, sizePerPage: number) {
+  //   if (this.token) {
+  //     this.walletService.getWalletTransactions(page, sizePerPage, this.transactionType, this.token).subscribe({
+  //       next: (response) => {
+  //         this.transactions = response.data.docs; // Adjust based on your response structure
+  //         this.totalTransactions = response.total; // Assuming your response contains the total transaction count
+  //         console.log(this.transactions);
+  //       },
+  //       error: (error) => {
+  //         console.error('Error fetching wallet transactions:', error);
+  //       }
+  //     });
+  //   }
+  // }
 
-  onPageChange(event: PageEvent): void {
-    this.page = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
-    this.sizePerPage = event.pageSize;
-    this.fetchWalletTransactions(this.page, this.sizePerPage);
-  }
+  // onPageChange(event: PageEvent): void {
+  //   this.page = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
+  //   this.sizePerPage = event.pageSize;
+  //   this.fetchWalletTransactions(this.page, this.sizePerPage);
+  // }
 }

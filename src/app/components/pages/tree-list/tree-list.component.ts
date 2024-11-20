@@ -23,7 +23,7 @@ export class TreeListComponent implements OnInit {
   searchTerm: string = '';
   pageSize: number = 10;
   selectedReferral: any   // Store selected referral for the modal
-
+ 
 
   constructor(
     private authService: AuthServicesService,
@@ -34,8 +34,11 @@ export class TreeListComponent implements OnInit {
   ngOnInit(): void {
     this.token = localStorage.getItem('authToken');
     this.fetchReferralTree();
+
+  
   }
 
+  
   fetchReferralTree(): void {
     this.loading = true;
     this.authService.getReferralTree(this.token).subscribe({
@@ -79,10 +82,6 @@ export class TreeListComponent implements OnInit {
     });
   }
 
-  // onPageChange(event: PageEvent): void {
-  //   this.currentPage = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
-  //   this.pageSize = event.pageSize;
-  // }
 
   onPageChange($event: any) {
     this.currentPage = $event.pageIndex + 1;

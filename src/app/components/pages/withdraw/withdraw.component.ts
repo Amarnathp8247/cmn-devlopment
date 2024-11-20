@@ -38,7 +38,7 @@ export class WithdrawComponent {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('authToken');
-    this.fetchWalletTransactions(this.page, this.sizePerPage);
+    // this.fetchWalletTransactions(this.page, this.sizePerPage);
   }
 
   withdraw() {
@@ -57,7 +57,7 @@ export class WithdrawComponent {
           });
 
           this.withdrawForm.reset();
-          this.fetchWalletTransactions(this.page, this.sizePerPage);
+          // this.fetchWalletTransactions(this.page, this.sizePerPage);
         },
         error: (err) => {
           const errorMessage = err.error?.message || 'Error validating referral code';
@@ -74,26 +74,26 @@ export class WithdrawComponent {
     }
   }
   
-  fetchWalletTransactions(page: number, sizePerPage: number) {
-    if (this.token) {
-      this.walletService.getWalletTransactions(page, sizePerPage, this.transactionType, this.token).subscribe({
-        next: (response) => {
-          this.transactions = response.data.docs; // Adjust based on your response structure
-          this.totalTransactions = response.total; // Assuming your response contains the total transaction count
-          console.log(this.transactions);
-        },
-        error: (error) => {
-          console.error('Error fetching wallet transactions:', error);
-        }
-      });
-    }
-  }
+  // fetchWalletTransactions(page: number, sizePerPage: number) {
+  //   if (this.token) {
+  //     this.walletService.getWalletTransactions(page, sizePerPage, this.transactionType, this.token).subscribe({
+  //       next: (response) => {
+  //         this.transactions = response.data.docs; // Adjust based on your response structure
+  //         this.totalTransactions = response.total; // Assuming your response contains the total transaction count
+  //         console.log(this.transactions);
+  //       },
+  //       error: (error) => {
+  //         console.error('Error fetching wallet transactions:', error);
+  //       }
+  //     });
+  //   }
+  // }
 
-  onPageChange(event: PageEvent): void {
-    this.page = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
-    this.sizePerPage = event.pageSize;
-    this.fetchWalletTransactions(this.page, this.sizePerPage);
-  }
+  // onPageChange(event: PageEvent): void {
+  //   this.page = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
+  //   this.sizePerPage = event.pageSize;
+  //   this.fetchWalletTransactions(this.page, this.sizePerPage);
+  // }
 
   
 }

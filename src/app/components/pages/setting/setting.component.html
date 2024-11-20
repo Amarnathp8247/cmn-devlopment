@@ -128,11 +128,12 @@
                         <form [formGroup]="updateWalletAddressForm" (ngSubmit)="updateWalletAddress()">
                             <div class="form-group mb-3">
                                 <label for="address">New Address:</label>
-                                <input type="text" id="address" class="form-control" formControlName="address" required />
+                                <input placeholder="Enter USDT BEP20 Address" type="text" id="address" class="form-control" formControlName="address" required />
                             </div>
                             <button type="submit" class="btn btn-info btn-block" [disabled]="updateWalletAddressForm.invalid">
                                 Update Address
                             </button>
+                            <h2 class="mt-2">Add USDT BEP20 Address Properly For withdraw your funds.</h2>
                         </form>
                     </div>
                 </div>
