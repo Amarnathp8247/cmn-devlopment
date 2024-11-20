@@ -25,25 +25,6 @@ export class SideBarComponent {
     }
   }
 
-  // Reference to the sidebar element
-  @ViewChild('sidebar', { static: false }) sidebar: ElementRef | undefined;
-
-  // Reference to the button element
-  @ViewChild('toggleButton', { static: false }) toggleButton: ElementRef | undefined;
-
-  
-
-  // Close sidebar if click happens outside of it
-  @HostListener('document:click', ['$event'])
-  clickOutside(event: MouseEvent) {
-    if (
-      this.sidebar &&
-      !this.sidebar.nativeElement.contains(event.target) 
-    ) {
-      this.isSidebarCollapsed = false;
-    }
-  }
-
   logout(): void {
     localStorage.removeItem('authToken');
     this.router.navigate(['/login']).then(() => {

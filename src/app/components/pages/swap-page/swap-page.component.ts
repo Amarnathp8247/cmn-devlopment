@@ -48,7 +48,7 @@ getUserData(){
   this.authServices.getProfile(this.token).subscribe({
     next: (response) => {
       this.userBlance = response.data.BUSDBalance
-      this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
+      this.totalInternalTransferBalance = response.data.TRADEBalance
     },
     error: (error) => {
       this.toastr.error('Failed to load profile information', 'Error');
@@ -64,7 +64,7 @@ getUserData(){
         password: this.fundTransferForm.value.password
       };
 
-      this.walletService.fundTransferData(depositFormData, this.token).subscribe({
+      this.walletService.swapData(depositFormData, this.token).subscribe({
         next: (response) => {  
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',

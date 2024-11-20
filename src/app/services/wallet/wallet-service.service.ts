@@ -76,6 +76,23 @@ export class WalletServiceService {
     const body = new URLSearchParams();
     body.set('amount', depositData.amount);
     body.set('password', depositData.password);
+    body.set('referralCode', depositData.referralCode);
+
+    return this.http.post(`${this.baseUrl}/user/wallet/transfer`, body.toString(), { headers });
+  }
+
+  
+
+  swapData(depositData: any, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': token,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    // Convert the object to URL-encoded format
+    const body = new URLSearchParams();
+    body.set('amount', depositData.amount);
+    body.set('password', depositData.password);
 
     return this.http.post(`${this.baseUrl}/user/wallet/swap`, body.toString(), { headers });
   }

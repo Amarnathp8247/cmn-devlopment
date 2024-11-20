@@ -52,7 +52,7 @@ export class BondingComponent {
         
   
         // this.userBlance = response.data.BUSDBalance
-        this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
+        this.totalInternalTransferBalance = response.data.TRADEBalance
         
       },
       error: (error) => {
@@ -77,6 +77,7 @@ export class BondingComponent {
             progressBar: true
           });
           this.fetchWalletTransactions(this.page, this.sizePerPage); // Refresh transactions after deposit
+          this.getUserData()
           this.stakeForm.reset()
           // Handle success notification here
         },

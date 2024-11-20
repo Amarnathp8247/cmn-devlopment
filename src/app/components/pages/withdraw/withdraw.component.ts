@@ -20,7 +20,7 @@ export class WithdrawComponent {
   sizePerPage = 10;
   transactionType = 'WITHDRAW';
   transactions: any = [];
-  totalTransactions: number = 0; 
+  totalTransactions: number = 0;
   loading = false;
   userBlance: any;
 
@@ -31,12 +31,12 @@ export class WithdrawComponent {
     private authServices: AuthServicesService
   ) {
     // Initialize the form groups in the constructor
-    
+
     this.withdrawForm = this.fb.group({
       amount: [0, [Validators.required, Validators.min(1)]],
       password: ['', [Validators.required]],
     });
-   
+
   }
 
   ngOnInit(): void {
@@ -47,15 +47,15 @@ export class WithdrawComponent {
 
 
 
-  getUserData(){
+  getUserData() {
 
     this.authServices.getProfile(this.token).subscribe({
       next: (response) => {
-        
-  
+
+
         this.userBlance = response.data.BUSDBalance
         // this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
-        
+
       },
       error: (error) => {
         this.toastr.error('Failed to load profile information', 'Error');
@@ -70,20 +70,20 @@ export class WithdrawComponent {
 
       this.walletService.withdraw(withdrawAmount, this.token).subscribe({
         next: (response) => {
-          this.toastr.success(response.message, '', {
+          this.toastr.success(response.body.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',
             closeButton: false,
             timeOut: 3000,
             progressBar: true
           });
-
+          this.getUserData()
           this.withdrawForm.reset();
           // this.fetchWalletTransactions(this.page, this.sizePerPage);
         },
         error: (err) => {
           const errorMessage = err.error?.message || 'Error validating referral code';
-        
+
           this.toastr.error(errorMessage, '', {
             toastClass: 'toast-custom toast-error',
             positionClass: 'toast-bottom-center',
@@ -95,7 +95,7 @@ export class WithdrawComponent {
       });
     }
   }
-  
+
   // fetchWalletTransactions(page: number, sizePerPage: number) {
   //   if (this.token) {
   //     this.walletService.getWalletTransactions(page, sizePerPage, this.transactionType, this.token).subscribe({
@@ -117,5 +117,5 @@ export class WithdrawComponent {
   //   this.fetchWalletTransactions(this.page, this.sizePerPage);
   // }
 
-  
+
 }

@@ -51,7 +51,7 @@ export class FundTransferComponent {
         
   
         // this.userBlance = response.data.BUSDBalance
-        this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
+        this.totalInternalTransferBalance = response.data.TRADEBalance
         
       },
       error: (error) => {
@@ -80,7 +80,7 @@ export class FundTransferComponent {
             timeOut: 3000,
             progressBar: true
           });
-
+this.getUserData()
           this.fundTransferForm.reset()
         },
         error: (err) => {
