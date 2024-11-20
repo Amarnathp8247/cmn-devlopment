@@ -1,28 +1,29 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServicesService } from 'src/app/services/auth/auth-services.service';
 import { WalletServiceService } from 'src/app/services/wallet/wallet-service.service';
 
 @Component({
-  selector: 'app-fund-transfer',
-  templateUrl: './fund-transfer.component.html',
-  styleUrls: ['./fund-transfer.component.scss']
+  selector: 'app-swap-page',
+  templateUrl: './swap-page.component.html',
+  styleUrls: ['./swap-page.component.scss']
 })
-export class FundTransferComponent {
+export class SwapPageComponent {
+
   fundTransferForm: FormGroup;
   token: any;
   showPassword = false;
   referralName:any = '';
-
+  disable:boolean= true
   page = 1;
   sizePerPage = 10;
   transactionType = 'FUND-TRANSFER';
   transactions: any = [];
   totalTransactions: number = 0; 
   loading = false;
-  totalInternalTransferBalance: any;
+  userBlance:any
+  totalInternalTransferBalance:any
 
   constructor(
     private walletService: WalletServiceService,
@@ -44,22 +45,22 @@ export class FundTransferComponent {
     this.getUserData()
   }
 
-  getUserData(){
+getUserData(){
 
-    this.authServices.getProfile(this.token).subscribe({
-      next: (response) => {
-        
-  
-        // this.userBlance = response.data.BUSDBalance
-        this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
-        
-      },
-      error: (error) => {
-        this.toastr.error('Failed to load profile information', 'Error');
-        this.loading = false;
-      }
-    });
-  }
+  this.authServices.getProfile(this.token).subscribe({
+    next: (response) => {
+      
+
+      this.userBlance = response.data.BUSDBalance
+      this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
+      
+    },
+    error: (error) => {
+      this.toastr.error('Failed to load profile information', 'Error');
+      this.loading = false;
+    }
+  });
+}
 
   fundTransfer() {
     if (this.fundTransferForm.valid) {
@@ -161,3 +162,4 @@ export class FundTransferComponent {
   //   this.fetchWalletTransactions(this.page, this.sizePerPage);
   // }
 }
+

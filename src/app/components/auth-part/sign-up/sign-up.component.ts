@@ -19,7 +19,6 @@ export class SignUpComponent {
   timer: number = 60;
   resendEnabled: boolean = false;
   interval: any;
-  loginId: any
   loginIdData: any
   constructor(
     private fb: FormBuilder,
@@ -47,7 +46,7 @@ export class SignUpComponent {
 
   ngOnInit() {
     const theme = localStorage.getItem('theme');
-    this.loginIdData = localStorage.getItem('loginId')
+    // this.loginIdData = localStorage.getItem('loginId')
     if (theme === 'dark') {
       document.documentElement.classList.add('dark-mode');
       this.isDarkMode = true;
@@ -97,7 +96,7 @@ export class SignUpComponent {
       this.authServices.signUp(userData).subscribe({
         next: (response: any) => {
 
-          this.loginId = localStorage.setItem("loginId", response.data.userData.loginId); // Store loginId from response
+          this.loginIdData = response.data.userData.loginId; // Store loginId from response
          
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
@@ -164,6 +163,7 @@ copyLoginIdLink(){
   navigator.clipboard.writeText(this.loginIdData)
   .then(() => {
     this.toastr.success('LoginId link copied to clipboard!');
+    this.router.navigate(['/login'])
   })
   .catch(err => {
     console.error('Failed to copy loginId link: ', err);
@@ -271,26 +271,26 @@ copyLoginIdLink(){
     });
   }
 
-  copyLoginId() {
-    if (this.loginIdData) {
-      navigator.clipboard.writeText(this.loginIdData).then(() => {
-        this.toastr.success('Login ID copied to clipboard', '', {
-          toastClass: 'toast-custom toast-success',
-          positionClass: 'toast-bottom-center',
-          closeButton: false,
-          timeOut: 3000,
-          progressBar: true
-        });
-        this.loginIdData = null; // Hide loginId after copying
-      }).catch(() => {
-        this.toastr.error('Failed to copy Login ID', '', {
-          toastClass: 'toast-custom toast-error',
-          positionClass: 'toast-bottom-center',
-          closeButton: false,
-          timeOut: 3000,
-          progressBar: true
-        });
-      });
-    }
-  }
+  // copyLoginId() {
+  //   if (this.loginIdData) {
+  //     navigator.clipboard.writeText(this.loginIdData).then(() => {
+  //       this.toastr.success('Login ID copied to clipboard', '', {
+  //         toastClass: 'toast-custom toast-success',
+  //         positionClass: 'toast-bottom-center',
+  //         closeButton: false,
+  //         timeOut: 3000,
+  //         progressBar: true
+  //       });
+  //       this.loginIdData = null; // Hide loginId after copying
+  //     }).catch(() => {
+  //       this.toastr.error('Failed to copy Login ID', '', {
+  //         toastClass: 'toast-custom toast-error',
+  //         positionClass: 'toast-bottom-center',
+  //         closeButton: false,
+  //         timeOut: 3000,
+  //         progressBar: true
+  //       });
+  //     });
+  //   }
+  // }
 }
