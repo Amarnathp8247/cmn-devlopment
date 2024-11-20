@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { WalletServiceService } from 'src/app/services/wallet/wallet-service.service';
 
@@ -14,7 +15,7 @@ export class DepositComponent implements OnInit {
   transactionHash: string = ''; // <-- Add this property
   qrCodeUrl: string | null = null;
   expirationMessage: string | null = null;
-  depositAddress: string | null = null;
+  depositAddress: any;
   imageShow: boolean = false
   // Timer variables
   timer: number = 15 * 60; // 15 minutes in seconds
@@ -25,7 +26,8 @@ export class DepositComponent implements OnInit {
   constructor(
     private walletService: WalletServiceService,
     private fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router,
   ) {
     this.depositForm = this.fb.group({
       amount: [0, [Validators.required, Validators.min(1)]],
@@ -57,11 +59,11 @@ export class DepositComponent implements OnInit {
 
   get minutes(): number {
     return Math.floor(this.timer / 60);  // Get full minutes from total seconds
-}
+  }
 
-get seconds(): number {
+  get seconds(): number {
     return this.timer % 60;  // Get the remaining seconds
-}
+  }
 
 
 
@@ -111,6 +113,20 @@ get seconds(): number {
     }
   }
 
+  copyLoginIdLink() {
+
+    navigator.clipboard.writeText(this.depositAddress)
+      .then(() => {
+        this.toastr.success('Deposit Address copied to clipboard!');
+      })
+      .catch(err => {
+        console.error('Failed to copy Deposit Address  ', err);
+        this.toastr.error('Failed to copy Deposit Address ');
+      });
+
+
+  }
+
   verifyTransactionHash(transactionHash: string) {
     if (!this.token) {
       this.toastr.error('Token not found. Please log in again.', '', {
@@ -132,6 +148,8 @@ get seconds(): number {
           timeOut: 3000,
           progressBar: true
         });
+
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         const errorMessage = err.error?.message || 'Error verifying transaction';

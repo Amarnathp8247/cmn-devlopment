@@ -20,7 +20,8 @@
               </div>
               <button type="submit" class="btn btn-primary btn-block" [disabled]="depositForm.invalid">
                 Deposit
-              </button>
+              </button>'
+              <h3>Deposit USDT BEP20 Funds Only.</h3>
             </form>
           </div>
         </div>
@@ -32,7 +33,9 @@
             <img [src]="qrCodeUrl" alt="QR Code" class="img-fluid" />
 
             <p class="text-muted">{{ expirationMessage }}</p>
-            <p><strong>Deposit Address:</strong> {{ depositAddress }}</p>
+            <p><strong>Deposit Address:</strong> {{ depositAddress }} <i class="fas mx-2 fa-copy  text-success cursor-pointer" (click)="copyLoginIdLink()"
+              title="Copy to clipboard"></i></p>
+            <h3>Deposit USDT BEP20 Funds Only.</h3>
           </div>
         </div>
        </div>
@@ -47,6 +50,7 @@
                 (click)="verifyTransactionHash(transactionHash)">
                 Verify Transaction
               </button>
+             
             </div>
   
             <!-- Time up message -->
