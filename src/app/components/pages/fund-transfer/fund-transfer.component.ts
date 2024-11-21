@@ -50,7 +50,7 @@ export class FundTransferComponent {
       next: (response) => {
         // this.userBlance = response.data.BUSDBalance
         this.totalInternalTransferBalance = response.data.TRADEBalance
-        
+
       },
       error: (error) => {
         this.toastr.error('Failed to load profile information', 'Error');
@@ -76,7 +76,7 @@ export class FundTransferComponent {
             timeOut: 3000,
             progressBar: true
           });
-this.getUserData()
+          this.getUserData()
           this.fundTransferForm.reset()
           this.authServices.toggleLoader(false);
         },
