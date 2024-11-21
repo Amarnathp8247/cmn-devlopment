@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
+  constructor(private router: Router){}
   isDarkMode: boolean = false;
   isSidebarCollapsed: boolean = false;
 
@@ -65,6 +66,11 @@ export class HeaderComponent {
     iframe.src = `https://fxpricing.com/fx-widget/technical-indicator-widget.php?id=1984&pair_weight=normal&click_target=blank&theme=${theme}&tm-cr=FFFFFF&hr-cr=00000013&by-cr=28A745&sl-cr=DC3545&flags=circle&value_alignment=center&tab=5M,15M,30M,1D&lang=en&font=Arial, sans-serif`;
   }
 
-
+  logout(): void {
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+  });
+  }
 
 }
