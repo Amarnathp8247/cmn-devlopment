@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthServicesService } from 'src/app/services/auth/auth-services.service';
 
 @Component({
   selector: 'app-trade-room',
@@ -6,8 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./trade-room.component.scss']
 })
 export class TradeRoomComponent {
+  constructor(private authService: AuthServicesService) {}
 
   ngAfterViewInit(): void {
+    this.authService.toggleLoader(true); 
     this.loadTradingViewScript();
   }
 
@@ -27,8 +30,17 @@ export class TradeRoomComponent {
       calendar: false,
       support_host: 'https://www.tradingview.com'
     });
-    document.querySelector('.tradingview-widget-container__widget')?.appendChild(script);
+
+    const container = document.querySelector('.tradingview-widget-container__widget');
+    if (container) {
+      container.appendChild(script);
+      script.onload = () => {
+        this.authService.toggleLoader(false); 
+      };
+      script.onerror = () => {
+        this.authService.toggleLoader(false); 
+        console.error('Failed to load TradingView widget.');
+      };
+    }
   }
-
-
 }

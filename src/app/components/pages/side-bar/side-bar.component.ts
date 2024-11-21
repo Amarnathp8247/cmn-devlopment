@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,15 +7,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./side-bar.component.scss']
 })
 export class SideBarComponent {
+  @ViewChildren('container') containers!: QueryList<ElementRef>;
+
   isSidebarCollapsed = false;
   isDarkMode = false;
   
   constructor(private router: Router){}
 
   toggleSidebar() {
-    this.isSidebarCollapsed = !this.isSidebarCollapsed;
-  }
+    // this.isSidebarCollapsed = !this.isSidebarCollapsed;
+    // const sidebar = document.getElementById('sidebar');
+    // if (sidebar) {
+    //   sidebar.classList.toggle('active');
+    // }
 
+    // this.containers.forEach((container) => {
+    //   container.nativeElement.classList.add('active-container');
+    //   console.log('Updated:', container.nativeElement.className); // Debugging
+    // });
+  }
+  
   toggleDarkMode(isDark: any) {
     this.isDarkMode = isDark;
     if (isDark) {

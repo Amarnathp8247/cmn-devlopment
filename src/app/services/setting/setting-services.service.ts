@@ -8,20 +8,18 @@ import { environment } from 'src/environments/environment.staging';
 })
 export class SettingServicesService {
   private baseUrl = `${environment.apiUrl}`; // Adjust to your API endpoint
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  
-  createTransactionPasswordData(body: any,  token: string): Observable<any> {
+  createTransactionPasswordData(body: any, token: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', token);
-
     return this.http.post(`${this.baseUrl}/user/wallet/create/transaction/password`, body, { headers, observe: 'response' })
       .pipe(
         catchError(this.handleError) // Handle error gracefully
       );
   }
-  changeTransactionPasswordData(body: any,  token: string): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', token);
 
+  changeTransactionPasswordData(body: any, token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', token);
     return this.http.put(`${this.baseUrl}/user/auth/change/password`, body, { headers, observe: 'response' })
       .pipe(
         catchError(this.handleError) // Handle error gracefully
@@ -36,11 +34,10 @@ export class SettingServicesService {
       );
   }
 
- 
-
   private handleError(error: any): Observable<never> {
     console.error('An error occurred:', error);
     return throwError(error);
   }
+
 }
 

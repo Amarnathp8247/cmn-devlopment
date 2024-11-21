@@ -10,20 +10,19 @@ import { WalletServiceService } from 'src/app/services/wallet/wallet-service.ser
   styleUrls: ['./swap-page.component.scss']
 })
 export class SwapPageComponent {
-
   fundTransferForm: FormGroup;
   token: any;
   showPassword = false;
-  referralName:any = '';
-  disable:boolean= true
+  referralName: any = '';
+  disable: boolean = true
   page = 1;
   sizePerPage = 10;
   transactionType = 'FUND-TRANSFER';
   transactions: any = [];
-  totalTransactions: number = 0; 
+  totalTransactions: number = 0;
   loading = false;
-  userBlance:any
-  totalInternalTransferBalance:any
+  userBlance: any
+  totalInternalTransferBalance: any
 
   constructor(
     private walletService: WalletServiceService,
@@ -44,28 +43,30 @@ export class SwapPageComponent {
     this.getUserData()
   }
 
-getUserData(){
-  this.authServices.getProfile(this.token).subscribe({
-    next: (response) => {
-      this.userBlance = response.data.BUSDBalance
-      this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
-    },
-    error: (error) => {
-      this.toastr.error('Failed to load profile information', 'Error');
-      this.loading = false;
-    }
-  });
-}
+  getUserData() {
+    this.authServices.toggleLoader(true);
+    this.authServices.getProfile(this.token).subscribe({
+      next: (response) => {
+        this.userBlance = response.data.BUSDBalance
+        this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
+        this.authServices.toggleLoader(false);
+      },
+      error: (error) => {
+        this.toastr.error('Failed to load profile information', 'Error');
+        this.authServices.toggleLoader(false);
+      }
+    });
+  }
 
   fundTransfer() {
     if (this.fundTransferForm.valid) {
+      this.walletService.toggleLoader(true);
       const depositFormData = {
         amount: this.fundTransferForm.value.amount,
         password: this.fundTransferForm.value.password
       };
-
       this.walletService.fundTransferData(depositFormData, this.token).subscribe({
-        next: (response) => {  
+        next: (response) => {
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',
@@ -75,6 +76,7 @@ getUserData(){
           });
           this.fundTransferForm.reset()
           this.getUserData()
+          this.walletService.toggleLoader(false);
         },
         error: (err) => {
           const errorMessage = err.error?.message || 'Error processing the transaction';
@@ -85,29 +87,11 @@ getUserData(){
             timeOut: 3000,
             progressBar: true
           });
+          this.walletService.toggleLoader(false);
         }
       });
     }
   }
-  // fetchWalletTransactions(page: number, sizePerPage: number) {
-  //   if (this.token) {
-  //     this.walletService.getWalletTransactions(page, sizePerPage, this.transactionType, this.token).subscribe({
-  //       next: (response) => {
-  //         this.transactions = response.data.docs; // Adjust based on your response structure
-  //         this.totalTransactions = response.total; // Assuming your response contains the total transaction count
-  //         console.log(this.transactions);
-  //       },
-  //       error: (error) => {
-  //         console.error('Error fetching wallet transactions:', error);
-  //       }
-  //     });
-  //   }
-  // }
 
-  // onPageChange(event: PageEvent): void {
-  //   this.page = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
-  //   this.sizePerPage = event.pageSize;
-  //   this.fetchWalletTransactions(this.page, this.sizePerPage);
-  // }
 }
 

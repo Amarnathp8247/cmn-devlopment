@@ -32,16 +32,21 @@ export class HeaderComponent {
     }
   }
 
-
-
   // Toggle sidebar collapse
   toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
     const sidebar = document.getElementById('sidebar');
+    const containers = document.getElementsByClassName('container');
+  
     if (sidebar) {
       sidebar.classList.toggle('active');
     }
+  
+    Array.from(containers).forEach((container: Element) => {
+      container.classList.toggle('active-container');
+    });
   }
+  
 
   ngOnInit() {
     const theme = localStorage.getItem('theme');

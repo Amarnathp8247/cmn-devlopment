@@ -3,15 +3,12 @@ import { PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServicesService } from 'src/app/services/auth/auth-services.service';
 import { TransactionServicesService } from 'src/app/services/transaction/transaction-services.service';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-
-
   token: any;
   loading = false;
   userBlance: any = 0
@@ -25,7 +22,7 @@ export class DashboardComponent {
   totalRewardBalance: any = 0
   avaliableRewards: any = 0
   refferalcode: any = ''
-  loginId:any
+  loginId: any
   bondBalance: any = ''
   totalCredited: number = 0;
   totalDebited: number = 0;
@@ -41,28 +38,19 @@ export class DashboardComponent {
   transactions: any[] = [];
   error: any;
   constructor(private authService: AuthServicesService,
-    private toastr: ToastrService ,private transactionService: TransactionServicesService) {
-
+    private toastr: ToastrService, private transactionService: TransactionServicesService) {
   }
+  
   ngOnInit(): void {
-
-
-
-    // Retrieve the token and profile info
     this.token = localStorage.getItem('authToken');
     this.getProfileInfo();
-
     this.fetchTransactions(this.currentPage, this.pageSize);
   }
 
-
-  
-
   getProfileInfo(): void {
-    this.loading = true;
+    this.authService.toggleLoader(true);
     this.authService.getProfile(this.token).subscribe({
       next: (response) => {
-
         this.userBlance = response.data.BUSDBalance
         this.totalStakedBalance = response.data.totalStakedBalance
         this.totalWithdrawalBalance = response.data.totalWithdrawalBalance
@@ -74,28 +62,26 @@ export class DashboardComponent {
         this.bondBalance = response.data.totalStakingRewardBalance
         // this.bondBalance = response.data.totalReferralRewardBalance
         this.refferalcode = response.data.referralCode
-        this.loginId =  response.data.loginId
+        this.loginId = response.data.loginId
         this.avaliableRewards = response.data.totalRewardBalance - this.totalUnlockRewardBalnce
         localStorage.setItem('balance', this.avaliableRewards)
         localStorage.setItem('isTrxPassCreated', response.data.isTrxPassCreated)
         localStorage.setItem('isWalletAdded', response.data.isWalletAdded)
-        this.loading = false;
+        this.authService.toggleLoader(false);
       },
       error: (error) => {
         this.toastr.error('Failed to load profile information', 'Error');
-        this.loading = false;
+        this.authService.toggleLoader(false);
       }
     });
   }
 
   fetchTransactions(page: number, size: number): void {
-    this.loading = true;
-
+    this.authService.toggleLoader(true);
     // Construct parameters object
     const params: any = {
       page: page.toString(),
-      sizePerPage:'10',
-      // limit: '10', // Limit to the latest 10 transactions
+      sizePerPage: '10',
     };
 
     // Add filtering parameters only if they have values
@@ -118,11 +104,11 @@ export class DashboardComponent {
         this.filteredTransactions = [...this.transactions]; // Initialize filtered transactions
         this.totalTransactions = response.data.totalDocs; // total count for pagination
         this.calculateTotals(); // Calculate totals when transactions are fetched
-        this.loading = false;
+        this.authService.toggleLoader(false);
       },
       error: (err) => {
         this.error = 'Failed to load transactions';
-        this.loading = false;
+        this.authService.toggleLoader(false);
       }
     });
   }
@@ -139,44 +125,35 @@ export class DashboardComponent {
       });
   }
 
-copyLoginIdLink(){
-
-  navigator.clipboard.writeText(this.loginId)
-  .then(() => {
-    this.toastr.success('LoginId link copied to clipboard!');
-  })
-  .catch(err => {
-    console.error('Failed to copy loginId link: ', err);
-    this.toastr.error('Failed to copy loginId link.');
-  });
-
-  
-}
-
-  
-
-  applyFilters(): void {
-    // Reset current page to 1 when applying new filters
-    this.currentPage = 1;
-    // Call fetchTransactions with updated filters
-    this.fetchTransactions(this.currentPage, this.pageSize);
+  copyLoginIdLink() {
+    navigator.clipboard.writeText(this.loginId)
+      .then(() => {
+        this.toastr.success('LoginId link copied to clipboard!');
+      })
+      .catch(err => {
+        console.error('Failed to copy loginId link: ', err);
+        this.toastr.error('Failed to copy loginId link.');
+      });
   }
 
+  applyFilters(): void {
+    this.currentPage = 1;
+    this.fetchTransactions(this.currentPage, this.pageSize);
+  }
 
   calculateTotals(): void {
     this.totalCredited = this.transactions
       .filter(transaction => transaction.amount > 0)
       .reduce((sum, transaction) => sum + transaction.amount, 0);
-
     this.totalDebited = this.transactions
       .filter(transaction => transaction.amount < 0)
       .reduce((sum, transaction) => sum + Math.abs(transaction.amount), 0);
   }
+
   onPageChange(event: PageEvent): void {
-    this.currentPage = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
+    this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.fetchTransactions(this.currentPage, this.pageSize);
   }
-
 
 }
