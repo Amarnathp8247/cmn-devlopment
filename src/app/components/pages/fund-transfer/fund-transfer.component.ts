@@ -50,7 +50,7 @@ export class FundTransferComponent {
       next: (response) => {
         // this.userBlance = response.data.BUSDBalance
         this.totalInternalTransferBalance = response.data.TRADEBalance
-
+        this.authServices.toggleLoader(false);
       },
       error: (error) => {
         this.toastr.error('Failed to load profile information', 'Error');
