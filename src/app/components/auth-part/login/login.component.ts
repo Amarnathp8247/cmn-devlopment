@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   isOldPasswordVisible: boolean = false;
   isNewPasswordVisible: boolean = false;
   isConfirmPasswordVisible: boolean = false;
-token:any
+  token: any
   constructor(
     private fb: FormBuilder,
     private authServices: AuthServicesService,
@@ -30,9 +30,6 @@ token:any
       loginId: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
-
-  
-
     this.changePasswordForm = this.fb.group({
       oldPassword: ['', [Validators.required, Validators.minLength(6)]],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -53,6 +50,7 @@ token:any
   }
 
   ngOnInit() {
+    this.authServices.toggleLoader(false);
     this.token = localStorage.getItem('authToken');
     const theme = localStorage.getItem('theme');
     if (theme === 'dark') {
@@ -68,8 +66,6 @@ token:any
   onSubmit() {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
-      console.log('Login data', loginData);
-
       this.authServices.login(loginData).subscribe({
         next: (response: any) => {
           const token = response.data.token;
@@ -109,38 +105,30 @@ token:any
     }
   }
 
-  // Show the forgot password form
   showForgotPassword() {
     this.isForgotPassword = true;
   }
 
-   // Toggle Old Password visibility
-   toggleOldPasswordVisibility(): void {
+  toggleOldPasswordVisibility(): void {
     this.isOldPasswordVisible = !this.isOldPasswordVisible;
   }
 
-  // Toggle New Password visibility
   toggleNewPasswordVisibility(): void {
     this.isNewPasswordVisible = !this.isNewPasswordVisible;
   }
 
-  // Toggle Confirm Password visibility
   toggleConfirmPasswordVisibility(): void {
     this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
   }
 
-
-  // Back to login form
   backToLogin() {
     this.isForgotPassword = false;
   }
 
-  // Forgot Password form submission
   onForgotPasswordSubmit() {
     if (this.changePasswordForm.valid) {
       const changePasswordData = this.changePasswordForm.value;
-
-      this.authServices.forgotPassword(changePasswordData , this.token).subscribe({
+      this.authServices.forgotPassword(changePasswordData, this.token).subscribe({
         next: (response: any) => {
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',

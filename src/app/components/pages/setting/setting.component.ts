@@ -9,16 +9,14 @@ import { AuthServicesService } from 'src/app/services/auth/auth-services.service
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.scss']
 })
-export class SettingComponent implements OnInit { 
-
-  // Declare form groups
+export class SettingComponent implements OnInit {
   updateWalletAddressForm: FormGroup;
   createTransactionPasswordForm: FormGroup;
   changeTransactionPasswordForm: FormGroup;
   loading = false;
   token: any;
-  showCreateTransactionPassword: any ; // Flag for creating password form
-  showUpdateWalletAddress: any ; // Flag for updating wallet address form
+  showCreateTransactionPassword: any; // Flag for creating password form
+  showUpdateWalletAddress: any; // Flag for updating wallet address form
   showPassword = false;
   showConfirmPassword = false;
   showPrevPassword = false;
@@ -34,7 +32,6 @@ export class SettingComponent implements OnInit {
       password: ['', Validators.required],
       cnfPassword: ['', Validators.required]
     });
-
     this.changeTransactionPasswordForm = this.fb.group({
       oldPassword: ['', Validators.required],
       newPassword: ['', Validators.required],
@@ -49,34 +46,26 @@ export class SettingComponent implements OnInit {
   ngOnInit(): void {
     this.token = localStorage.getItem('authToken');
     this.getProfileInfo()
-    
   }
 
-  
   getProfileInfo(): void {
-    this.loading = true;
+    this.authService.toggleLoader(true);
     this.authService.getProfile(this.token).subscribe({
       next: (response) => {
-        // Show Create Transaction Password form if isTrxPassCreated is false
         this.showCreateTransactionPassword = response.data?.isTrxPassCreated === false;
-  
-        // Show Update Wallet Address form if isWalletAdded is false
         this.showUpdateWalletAddress = response.data?.isWalletAdded === false;
-  
-        this.loading = false;
+        this.authService.toggleLoader(false);
       },
       error: (error) => {
         this.toastr.error('Failed to load profile information', 'Error');
-        this.loading = false;
+        this.authService.toggleLoader(false);
       }
     });
   }
-  
 
   createTransactionPassword() {
     if (this.createTransactionPasswordForm.valid) {
       const createTransactionPassword = this.createTransactionPasswordForm.value;
-
       this.settingServicesService.createTransactionPasswordData(createTransactionPassword, this.token).subscribe({
         next: (response) => {
           this.toastr.success(response.body.message, '', {
@@ -86,7 +75,6 @@ export class SettingComponent implements OnInit {
             timeOut: 3000,
             progressBar: true
           });
-          // Hide the form after successful creation
         },
         error: (err) => {
           const errorMessage = err.error?.message || 'Error creating transaction password';
@@ -105,7 +93,6 @@ export class SettingComponent implements OnInit {
   changeTransactionPassword() {
     if (this.changeTransactionPasswordForm.valid) {
       const changeTransactionPassword = this.changeTransactionPasswordForm.value;
-
       this.settingServicesService.changeTransactionPasswordData(changeTransactionPassword, this.token).subscribe({
         next: (response) => {
           this.toastr.success(response.message, '', {
@@ -133,7 +120,6 @@ export class SettingComponent implements OnInit {
   updateWalletAddress() {
     if (this.updateWalletAddressForm.valid) {
       const updateWalletAddress = this.updateWalletAddressForm.value;
-
       this.settingServicesService.updateWalletAddressData(updateWalletAddress, this.token).subscribe({
         next: (response) => {
           this.toastr.success(response.body.message, '', {
@@ -158,4 +144,5 @@ export class SettingComponent implements OnInit {
       });
     }
   }
+  
 }

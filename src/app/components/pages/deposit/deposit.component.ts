@@ -12,23 +12,17 @@ import { WalletServiceService } from 'src/app/services/wallet/wallet-service.ser
 export class DepositComponent implements OnInit {
   depositForm: FormGroup;
   token: string | null = null;
-  transactionHash: string = ''; // <-- Add this property
+  transactionHash: string = '';
   qrCodeUrl: string | null = null;
   expirationMessage: string | null = null;
   depositAddress: any;
   imageShow: boolean = false
   // Timer variables
-  timer: number = 15 * 60; // 15 minutes in seconds
+  timer: number = 15 * 60;
   intervalId: any;
   buttonEnabled: boolean = true;
 
-
-  constructor(
-    private walletService: WalletServiceService,
-    private fb: FormBuilder,
-    private toastr: ToastrService,
-    private router: Router,
-  ) {
+  constructor(private walletService: WalletServiceService, private fb: FormBuilder, private toastr: ToastrService, private router: Router) {
     this.depositForm = this.fb.group({
       amount: [0, [Validators.required, Validators.min(1)]],
     });
@@ -36,7 +30,9 @@ export class DepositComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('authToken');
+    this.walletService.toggleLoader(false);
   }
+
   ngOnDestroy(): void {
     // Clear the timer when component is destroyed
     if (this.intervalId) {
@@ -65,13 +61,10 @@ export class DepositComponent implements OnInit {
     return this.timer % 60;  // Get the remaining seconds
   }
 
-
-
-
   deposit() {
     if (this.depositForm.valid) {
+      this.walletService.toggleLoader(true);
       const depositFormAmount = this.depositForm.value;
-
       this.walletService.deposit(depositFormAmount, this.token!).subscribe({
         next: (response) => {
           this.toastr.success(response.body.message, '', {
@@ -89,17 +82,16 @@ export class DepositComponent implements OnInit {
           // Start the timer for verification
           this.timer = 15 * 60; // Reset timer to 15 minutes
           this.buttonEnabled = true; // Enable the button
-
           // Start the timer again after a successful deposit
           if (this.intervalId) {
             clearInterval(this.intervalId); // Clear any existing interval
           }
           this.startTimer(); // Start a new timer
-
-
           this.depositForm.reset();
+          this.walletService.toggleLoader(false);
         },
         error: (err) => {
+          this.walletService.toggleLoader(false);
           const errorMessage = err.error?.message || 'Error validating deposit';
           this.toastr.error(errorMessage, '', {
             toastClass: 'toast-custom toast-error',
@@ -114,7 +106,6 @@ export class DepositComponent implements OnInit {
   }
 
   copyLoginIdLink() {
-
     navigator.clipboard.writeText(this.depositAddress)
       .then(() => {
         this.toastr.success('Deposit Address copied to clipboard!');
@@ -123,8 +114,6 @@ export class DepositComponent implements OnInit {
         console.error('Failed to copy Deposit Address  ', err);
         this.toastr.error('Failed to copy Deposit Address ');
       });
-
-
   }
 
   verifyTransactionHash(transactionHash: string) {
@@ -148,7 +137,6 @@ export class DepositComponent implements OnInit {
           timeOut: 3000,
           progressBar: true
         });
-
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
@@ -163,4 +151,5 @@ export class DepositComponent implements OnInit {
       }
     });
   }
+
 }

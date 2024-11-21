@@ -11,11 +11,9 @@ import { WalletServiceService } from 'src/app/services/wallet/wallet-service.ser
   styleUrls: ['./withdraw.component.scss']
 })
 export class WithdrawComponent {
-
   withdrawForm: FormGroup;
   token: any;
   showWithdrawPassword = false;
-
   page = 1;
   sizePerPage = 10;
   transactionType = 'WITHDRAW';
@@ -31,12 +29,18 @@ export class WithdrawComponent {
     private authServices: AuthServicesService
   ) {
     // Initialize the form groups in the constructor
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8aa6010272a7527c7cf77cf1dc72c15d30693fc2
     this.withdrawForm = this.fb.group({
       amount: [0, [Validators.required, Validators.min(1)]],
       password: ['', [Validators.required]],
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8aa6010272a7527c7cf77cf1dc72c15d30693fc2
   }
 
   ngOnInit(): void {
@@ -45,6 +49,7 @@ export class WithdrawComponent {
     this.getUserData()
   }
 
+<<<<<<< HEAD
 
 
   getUserData() {
@@ -56,18 +61,26 @@ export class WithdrawComponent {
         this.userBlance = response.data.BUSDBalance
         // this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
 
+=======
+  getUserData() {
+    this.authServices.toggleLoader(true);
+    this.authServices.getProfile(this.token).subscribe({
+      next: (response) => {
+        this.userBlance = response.data.BUSDBalance
+        // this.totalInternalTransferBalance = response.data.totalInternalTransferBalance
+        this.authServices.toggleLoader(false);
+>>>>>>> 8aa6010272a7527c7cf77cf1dc72c15d30693fc2
       },
       error: (error) => {
         this.toastr.error('Failed to load profile information', 'Error');
-        this.loading = false;
+        this.authServices.toggleLoader(false);
       }
     });
   }
   withdraw() {
     if (this.withdrawForm.valid) {
+      this.authServices.toggleLoader(true);
       const withdrawAmount = this.withdrawForm.value; // Get the value from the form
-      // const withdrawPassword = this.withdrawForm.value.withdrawPassword; // Get the password from the form
-
       this.walletService.withdraw(withdrawAmount, this.token).subscribe({
         next: (response) => {
           this.toastr.success(response.body.message, '', {
@@ -77,13 +90,20 @@ export class WithdrawComponent {
             timeOut: 3000,
             progressBar: true
           });
+<<<<<<< HEAD
           this.getUserData()
+=======
+>>>>>>> 8aa6010272a7527c7cf77cf1dc72c15d30693fc2
           this.withdrawForm.reset();
-          // this.fetchWalletTransactions(this.page, this.sizePerPage);
+          this.authServices.toggleLoader(false);
         },
         error: (err) => {
+          this.authServices.toggleLoader(false);
           const errorMessage = err.error?.message || 'Error validating referral code';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8aa6010272a7527c7cf77cf1dc72c15d30693fc2
           this.toastr.error(errorMessage, '', {
             toastClass: 'toast-custom toast-error',
             positionClass: 'toast-bottom-center',
@@ -95,6 +115,7 @@ export class WithdrawComponent {
       });
     }
   }
+<<<<<<< HEAD
 
   // fetchWalletTransactions(page: number, sizePerPage: number) {
   //   if (this.token) {
@@ -118,4 +139,7 @@ export class WithdrawComponent {
   // }
 
 
+=======
+
+>>>>>>> 8aa6010272a7527c7cf77cf1dc72c15d30693fc2
 }

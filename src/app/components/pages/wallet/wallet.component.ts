@@ -9,26 +9,19 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./wallet.component.scss']
 })
 export class WalletComponent implements OnInit {
-  // Declare form groups
- 
-
   token: any;
-  avilableBalance:any
+  avilableBalance: any
   page = 1;
   sizePerPage = 10;
   transactionType = 'CONVERT-REWARD';
   transactions: any = [];
-  totalTransactions: number = 0; 
-  loading = false;
+  totalTransactions: number = 0;
 
   constructor(
     private walletService: WalletServiceService,
     private fb: FormBuilder, // Inject FormBuilder
     private toastr: ToastrService
   ) {
-   
-
-   
   }
 
   ngOnInit(): void {
@@ -38,43 +31,45 @@ export class WalletComponent implements OnInit {
   }
 
   convertWallet() {
-  
-      this.walletService.convertWalletFormData(this.token).subscribe({
-        next: (response) => {
-          this.toastr.success(response.message, '', {
-            toastClass: 'toast-custom toast-success',
-            positionClass: 'toast-bottom-center',
-            closeButton: false,
-            timeOut: 3000,
-            progressBar: true
-          });
-          this.fetchWalletTransactions(this.page, this.sizePerPage);
-        },
-        error: (err) => {
-          const errorMessage = err.error?.message || 'Error validating referral code';
-        
-          this.toastr.error(errorMessage, '', {
-            toastClass: 'toast-custom toast-error',
-            positionClass: 'toast-bottom-center',
-            closeButton: false,
-            timeOut: 3000,
-            progressBar: true
-          });
-        }
-      });
-    
+    this.walletService.toggleLoader(true);
+    this.walletService.convertWalletFormData(this.token).subscribe({
+      next: (response) => {
+        this.toastr.success(response.message, '', {
+          toastClass: 'toast-custom toast-success',
+          positionClass: 'toast-bottom-center',
+          closeButton: false,
+          timeOut: 3000,
+          progressBar: true
+        });
+        this.fetchWalletTransactions(this.page, this.sizePerPage);
+        this.walletService.toggleLoader(false);
+      },
+      error: (err) => {
+        this.walletService.toggleLoader(false);
+        const errorMessage = err.error?.message || 'Error validating referral code';
+        this.toastr.error(errorMessage, '', {
+          toastClass: 'toast-custom toast-error',
+          positionClass: 'toast-bottom-center',
+          closeButton: false,
+          timeOut: 3000,
+          progressBar: true
+        });
+      }
+    });
   }
 
   fetchWalletTransactions(page: number, sizePerPage: number) {
     if (this.token) {
+      this.walletService.toggleLoader(true);
       this.walletService.getWalletTransactions(page, sizePerPage, this.transactionType, this.token).subscribe({
         next: (response) => {
           this.transactions = response.data.docs; // Adjust based on your response structure
           this.totalTransactions = response.total; // Assuming your response contains the total transaction count
-          console.log(this.transactions);
+          this.walletService.toggleLoader(false);
         },
         error: (error) => {
           console.error('Error fetching wallet transactions:', error);
+          this.walletService.toggleLoader(false);
         }
       });
     }
@@ -85,4 +80,5 @@ export class WalletComponent implements OnInit {
     this.sizePerPage = event.pageSize;
     this.fetchWalletTransactions(this.page, this.sizePerPage);
   }
+  
 }
