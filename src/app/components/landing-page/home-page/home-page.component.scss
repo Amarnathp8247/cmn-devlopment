@@ -208,3 +208,12 @@ section {
   padding: 5em 0 8.885em 0;
 }
 
+.container{
+  margin: 0 !important;
+  padding: 24px !important;
+  position: relative;
+  left: 0px;
+  width: auto;
+  max-width: 100% !important;
+  transition: all .3s ease-in-out;
+}
