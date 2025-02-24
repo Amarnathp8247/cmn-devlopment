@@ -2,29 +2,37 @@
 
 <div class="wrapper">
   <!-- Sidebar -->
-  <nav id="sidebar" [ngClass]="{'active': isSidebarCollapsed}">
+  <nav #sidebar id="sidebar" [class.collapsed]="isSidebarCollapsed">
     <ul class="list-unstyled components cursor-pointer">
       <!-- Dashboard -->
       <li>
-        <a routerLink="/dashboard">
+        <a routerLink="/dashboard" routerLinkActive="active-link" (click)="toggleSidebar()">
           <i class="fas fa-tachometer-alt"></i> Dashboard
         </a>
       </li>
-      <li>
-        <a routerLink="/trade-room">
+      <!-- <li>
+        <a routerLink="/trade-room" routerLinkActive="active-link" (click)="toggleSidebar()">
           <i class="fas fa-chart-line"></i> Trade Room
         </a>
-      </li>
+      </li> -->
 
       <!-- Network -->
-      <li>
-        <a routerLink="/reffral-list"><i class="fas fa-sitemap"></i> Network</a>
-      </li>
+       <li>
+        <span class="w-100 text-start" data-bs-toggle="collapse" data-bs-target="#networkSubmenu" aria-expanded="false" aria-controls="networkSubmenu">
+          <i class="fas fa-sitemap"></i> Network <i class="fas fa-chevron-down float-end"></i>
+        </span>
+        <div class="collapse" id="networkSubmenu" data-bs-parent="#sidebar">
+          <ul class="list-unstyled ps-4">
+            <li><a routerLink="/reffral-list" routerLinkActive="active-link" (click)="toggleSidebar()"><i class="fas fa-network-wired"></i> Network List</a></li>
+            <li><a routerLink="/network-tree" routerLinkActive="active-link" (click)="toggleSidebar()"><i class="fas fa-sitemap"></i> Network Tree</a></li>
+          </ul>
+        </div>
+      </li> 
 
       <!-- Bond -->
-      <li>
-        <a routerLink="/bonding"> <i class="fas fa-handshake"></i> Bond</a>
-      </li>
+      <!-- <li>
+        <a routerLink="/bonding" (click)="toggleSidebar()"> <i class="fas fa-handshake"></i> Bond</a>
+      </li> -->
 
       <!-- Wallet -->
       <li>
@@ -33,17 +41,18 @@
         </span>
         <div class="collapse" id="walletSubmenu" data-bs-parent="#sidebar">
           <ul class="list-unstyled ps-4">
-            <li><a routerLink="/deposit"><i class="fas fa-arrow-down"></i> Deposit</a></li>
-            <li><a routerLink="/withdraw"><i class="fas fa-arrow-up"></i> Withdraw</a></li>
-            <li><a routerLink="/fund-transfer"><i class="fas fa-exchange-alt"></i> Fund Transfer</a></li>
-            <li><a routerLink="/wallet"><i class="fas fa-wallet"></i> Convert Wallet</a></li>
+            <li><a routerLink="/deposit" routerLinkActive="active-link" (click)="toggleSidebar()"><i class="fas fa-arrow-down"></i> Deposit</a></li>
+            <li><a routerLink="/withdraw" routerLinkActive="active-link" (click)="toggleSidebar()"><i class="fas fa-arrow-up"></i> Withdraw</a></li>
+            <li><a routerLink="/fund-transfer" routerLinkActive="active-link" (click)="toggleSidebar()"><i class="fas fa-exchange-alt"></i> Fund Transfer</a></li>
+            <!-- <li><a routerLink="/wallet" routerLinkActive="active-link" (click)="toggleSidebar()"><i class="fas fa-wallet"></i> Convert Wallet</a></li>
+            <li><a routerLink="/swap-page" routerLinkActive="active-link" (click)="toggleSidebar()"><i class="fas fa-wallet"></i> swap</a></li> -->
           </ul>
         </div>
       </li>
 
       <!-- Transaction -->
       <li>
-        <a routerLink="/transaction"> <i class="fas fa-exchange-alt"></i> Transaction</a>
+        <a routerLink="/transaction" (click)="toggleSidebar()"> <i class="fas fa-exchange-alt"></i> Transaction</a>
       </li>
 
       <!-- Settings -->
@@ -53,31 +62,28 @@
         </span>
         <div class="collapse" id="settingsSubmenu" data-bs-parent="#sidebar">
           <ul class="list-unstyled ps-4">
-            <li><a routerLink="/profile"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a routerLink="/setting"><i class="fas fa-shield-alt"></i> Security</a></li>
+            <li><a routerLink="/profile" routerLinkActive="active-link" (click)="toggleSidebar()"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a routerLink="/setting" routerLinkActive="active-link" (click)="toggleSidebar()"><i class="fas fa-shield-alt"></i> Security</a></li>
           </ul>
         </div>
       </li>
 
       <!-- Support -->
       <li>
-        <a routerLink="/support"> <i class="fas fa-life-ring"></i> Support</a>
+        <a routerLink="/support" (click)="toggleSidebar()"> <i class="fas fa-life-ring"></i> Support</a>
       </li>
 
       <!-- Logout -->
       <li>
-        <a (click)="logout()">
-          <i class="fas fa-sign-out-alt"></i> Logout
+        <a (click)="logout(); toggleSidebar()">
+          <i class="fas fa-sign-out-alt" routerLinkActive="active-link"></i> Logout
         </a>
       </li>
     </ul>
   </nav>
 
   <!-- Page Content -->
-  <div id="content">
+  <div id="content" class="active-content">
     <router-outlet></router-outlet>
   </div>
 </div>
-
-<!-- Import Bootstrap JS for Collapse functionality -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

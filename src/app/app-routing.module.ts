@@ -42,6 +42,9 @@ const routes: Routes = [
       { path: 'fund-transfer', loadChildren: () => import('./components/pages/fund-transfer/fund-transfer.module').then(m => m.FundTransferModule) },
       { path: 'bonding', loadChildren: () => import('./components/pages/bonding/bonding.module').then(m => m.BondingModule) },
       { path: 'support', loadChildren: () => import('./components/pages/support/support.module').then(m => m.SupportModule) },
+      { path: 'network-tree', loadChildren: () => import('./components/pages/network-tree/network-tree.module').then(m => m.NetworkTreeModule) },
+      { path: 'swap-page', loadChildren: () => import('./components/pages/swap-page/swap-page.module').then(m => m.SwapPageModule) },
+
       {
         path: 'trade-room',
         component: TradeRoomComponent
@@ -50,8 +53,7 @@ const routes: Routes = [
       // Add other protected routes here
     ]
   },
-  
-
+ 
   { path: '**', redirectTo: 'login' }
 ];
 

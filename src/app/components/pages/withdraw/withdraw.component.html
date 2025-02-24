@@ -1,7 +1,7 @@
 <!-- wallet.component.html -->
 
 <div class="wrapper">
-    <div id="content">
+    <div id="content" class="active-content">
         <div class="container">
             <div class="row justify-content-center">
                 <!-- Withdrawal Card -->
@@ -11,6 +11,7 @@
                     </div>
                     <div class="card-body">
                         <form [formGroup]="withdrawForm" (ngSubmit)="withdraw()">
+                            <h3 style="float: right;">Balance : {{userBlance}}</h3>
                             <div class="form-group mb-3">
                                 <label for="withdrawAmount">Amount to Withdraw:</label>
                                 <input
@@ -57,9 +58,13 @@
                             <button type="submit" class="btn btn-danger btn-block" [disabled]="withdrawForm.invalid">
                                 Withdraw
                             </button>
+
+                            <h3>Check your USDT BEP20 Address Properly before withdraw funds.</h3>
                         </form>
                     </div>
                 </div>
+
+              
 
                 
             </div>

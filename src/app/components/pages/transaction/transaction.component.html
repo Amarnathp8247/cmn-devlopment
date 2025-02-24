@@ -2,7 +2,7 @@
 
 <div class="wrapper">
   <!-- Page Content -->
-  <div id="content">
+  <div id="content" class="active-content">
     <div class="container">
       <h2>Transaction History</h2>
 
@@ -54,7 +54,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let transaction of transactions; let i = index">
-              <td>{{ i + 1 }}</td>
+              <td>{{ (currentPage - 1) * pageSize + (i + 1) }}</td>
               <td>{{ transaction.transactionType }}</td>
               <td>
                 <span *ngIf="transaction.amount > 0">{{ transaction.amount ? transaction.amount : '-' }}</span>

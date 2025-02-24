@@ -1,23 +1,20 @@
 <div class="wrapper">
-    <div id="content">
+    <div id="content" class="active-content">
         <div class="container">
-            <h2>Referral Data</h2>
+            <h2>Referral List</h2>
             <div class="row justify-content-center">
                 <div class="col-md-10 col-sm-10">
                     <!-- Referral Tree Table -->
                     <div class="mt-4">
                         <div class="d-flex justify-content-between">
-
-
-
                             <!-- Search Input -->
                             <div class="form-group mb-3 w-25">
                                 <!-- <input type="text" class="form-control "
                                     style="background-color: aliceblue !important;  color: black;" placeholder="Search "
                                     [(ngModel)]="searchQuery" (ngModelChange)="filterReferrals()" /> -->
-                                    <input class="report-search-bttn" type="text" placeholder="Search..." [(ngModel)]="searchTerm" (keyup)="filterReferrals()" />
+                                <input class="report-search-bttn" type="text" placeholder="Search..."
+                                    [(ngModel)]="searchTerm" (keyup)="filterReferrals()" />
                             </div>
-
                         </div>
                         <div class="table-responsive">
                             <!-- Referral Data Table -->
@@ -28,7 +25,6 @@
                                         <th>Referral Code</th>
                                         <th>Name</th>
                                         <th>Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,25 +39,22 @@
                                     </tr>
                                 </tbody>
                             </table>
-
                         </div>
 
                         <!-- <mat-paginator class="pagination" [length]="filteredReferrals.length" [pageSize]="10"
                             [pageSizeOptions]="[5, 10, 25]" (page)="onPageChange($event)"></mat-paginator> -->
 
-                            <mat-paginator #paginator [length]="pagelength" [pageSize]="itemPerPage" showFirstLastButtons="true"
-                            aria-label="Select page" [pageSizeOptions]="[10, 25, 50]" (page)="onPageChange($event)">
-                          </mat-paginator>
-
+                        <mat-paginator #paginator [length]="pagelength" [pageSize]="itemPerPage"
+                            showFirstLastButtons="true" aria-label="Select page" [pageSizeOptions]="[10, 25, 50]"
+                            (page)="onPageChange($event)" class="pagination">
+                        </mat-paginator>
                         <p *ngIf="filteredReferrals.length === 0" class="text-center">No referrals found.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -80,7 +73,6 @@
                                 <th>Sponser</th>
                                 <th>Total Team</th>
                                 <th>Bond Balance</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -89,14 +81,11 @@
                                 <td>{{ selectedReferral?.sponser }}</td>
                                 <td>{{ selectedReferral?.totalTeam }}</td>
                                 <td>{{ selectedReferral?.totalStakedBalance }}</td>
-
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

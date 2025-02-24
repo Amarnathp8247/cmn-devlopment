@@ -111,7 +111,7 @@ section {
 
 .pricing-palden .pricing-deco {
   border-radius: 10px 10px 0 0;
-  background: linear-gradient(135deg,#03095e,#0314f9);
+  background: linear-gradient(135deg, #01272b, #024148);
   padding: 4em 0 9em;
   position: relative;
 }
@@ -194,7 +194,7 @@ section {
   padding: 1em 2em;
   color: #fff;
   border-radius: 30px;
-  background: linear-gradient(135deg,#a93bfe,#584efd);
+  background: linear-gradient(135deg, #f0cc02, #bb6b07);
   -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
@@ -208,3 +208,12 @@ section {
   padding: 5em 0 8.885em 0;
 }
 
+.container{
+  margin: 0 !important;
+  padding: 24px !important;
+  position: relative;
+  left: 0px;
+  width: auto;
+  max-width: 100% !important;
+  transition: all .3s ease-in-out;
+}

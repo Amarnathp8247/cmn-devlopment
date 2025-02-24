@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div id="content">
+    <div id="content" class="active-content">
         <div class="container">
             <div class="row justify-content-center">
                 <!-- Staking Card -->
@@ -9,6 +9,7 @@
                     </div>
                     <div class="card-body">
                         <form [formGroup]="fundTransferForm" (ngSubmit)="fundTransfer()">
+                            <h3 style="float: right;">Trade Balance : {{totalInternalTransferBalance}}</h3>
                             <div class="form-group mb-3">
                                 <label for="stakeAmount">Amount to Fund Transfer:</label>
                                 <input
@@ -85,6 +86,7 @@
                         </form>
                     </div>
                 </div>
+
             </div>
        
     </div>

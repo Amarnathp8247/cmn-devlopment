@@ -15,12 +15,7 @@ export class ProfilePageComponent implements OnInit {
   isDarkMode: boolean = false;
   token: any;
 
-
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthServicesService,
-    private toastr: ToastrService
-  ) {}
+  constructor(private fb: FormBuilder, private authService: AuthServicesService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // Initialize the form group with validators
@@ -28,7 +23,6 @@ export class ProfilePageComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-   
     });
 
     // Retrieve the token and profile info
@@ -36,10 +30,8 @@ export class ProfilePageComponent implements OnInit {
     this.getProfileInfo();
   }
 
-  
-
   getProfileInfo(): void {
-    this.loading = true;
+    this.authService.toggleLoader(true);
     this.authService.getProfile(this.token).subscribe({
       next: (response) => {
         this.profileForm.patchValue({
@@ -47,39 +39,35 @@ export class ProfilePageComponent implements OnInit {
           email: response.data.email,
           mobile: response.data.mobile,
         });
-        this.loading = false;
+        this.authService.toggleLoader(false);
       },
       error: (error) => {
         this.toastr.error('Failed to load profile information', 'Error');
-        this.loading = false;
+        this.authService.toggleLoader(false);
       }
     });
   }
 
- // Method to handle form submission and update the profile
-updateProfile(): void {
-  if (this.profileForm.valid) {
-    this.loading = true;
-
-    // Extract only the necessary fields
-    const { name, email, mobile } = this.profileForm.value;
-    const updatedData = { name, email, mobile }; // Create an object with only the needed fields
-
-    this.authService.updateProfile(this.token, updatedData).subscribe({
-      next: (response) => {
-        this.toastr.success('Profile updated successfully!', 'Success');
-        this.loading = false;
-      },
-      error: (error) => {
-        this.toastr.error('Failed to update profile', 'Error');
-        this.loading = false;
-      }
-    });
-  } else {
-    this.toastr.warning('Please fill out the form correctly', 'Warning');
+  // Method to handle form submission and update the profile
+  updateProfile(): void {
+    if (this.profileForm.valid) {
+      this.authService.toggleLoader(true);
+      // Extract only the necessary fields
+      const { name, email, mobile } = this.profileForm.value;
+      const updatedData = { name, email, mobile }; // Create an object with only the needed fields
+      this.authService.updateProfile(this.token, updatedData).subscribe({
+        next: (response) => {
+          this.toastr.success('Profile updated successfully!', 'Success');
+          this.authService.toggleLoader(false);
+        },
+        error: (error) => {
+          this.toastr.error('Failed to update profile', 'Error');
+          this.authService.toggleLoader(false);
+        }
+      });
+    } else {
+      this.toastr.warning('Please fill out the form correctly', 'Warning');
+    }
   }
-}
-
-
 
 }

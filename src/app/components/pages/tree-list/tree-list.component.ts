@@ -22,8 +22,7 @@ export class TreeListComponent implements OnInit {
   filteredReferrals: any[] = [];
   searchTerm: string = '';
   pageSize: number = 10;
-  selectedReferral: any   // Store selected referral for the modal
-
+  selectedReferral: any;
 
   constructor(
     private authService: AuthServicesService,
@@ -33,23 +32,23 @@ export class TreeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('authToken');
-    this.fetchReferralTree();
+    this.fetchReferralTree();  
   }
 
   fetchReferralTree(): void {
-    this.loading = true;
+    this.authService.toggleLoader(true); 
     this.authService.getReferralTree(this.token).subscribe({
       next: (response: any) => {
         this.referralTree = response.data; // Adjust this according to actual API response
         this.pagelength = this.referralTree.length;
         // this.filterReferrals();
         this.localPagination()
-        this.loading = false;
+        this.authService.toggleLoader(false); 
       },
       error: (err) => {
         console.error('Failed to fetch referral tree', err);
         this.toastr.error('Failed to fetch referral data');
-        this.loading = false;
+        this.authService.toggleLoader(false); 
         this.pagelength = 0;
       }
     });
@@ -68,8 +67,6 @@ export class TreeListComponent implements OnInit {
     this.authService.getReferralInfomation(referralCode, this.token).subscribe({
       next: (response: any) => {
         this.selectedReferral = response.data
-
-        console.log('Referral Info:', response.data);
         // Process the referral information as needed
       },
       error: (err) => {
@@ -79,11 +76,6 @@ export class TreeListComponent implements OnInit {
     });
   }
 
-  // onPageChange(event: PageEvent): void {
-  //   this.currentPage = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
-  //   this.pageSize = event.pageSize;
-  // }
-
   onPageChange($event: any) {
     this.currentPage = $event.pageIndex + 1;
     if (this.itemPerPage !== $event.pageSize) {
@@ -91,6 +83,7 @@ export class TreeListComponent implements OnInit {
     }
     this.localPagination()
   }
+
   localPagination() {
     let toPage = this.itemPerPage * this.currentPage;
     let fromPage = toPage - this.itemPerPage;

@@ -32,15 +32,11 @@ export class TransactionComponent implements OnInit {
   }
 
   fetchTransactions(page: number, size: number): void {
-    this.loading = true;
-
-    // Construct parameters object
+    this.transactionService.toggleLoader(true);
     const params: any = {
       page: page.toString(),
       sizePerPage: size.toString(),
     };
-
-    // Add filtering parameters only if they have values
     if (this.transactionType) {
       params.transactionType = this.transactionType;
     }
@@ -57,40 +53,34 @@ export class TransactionComponent implements OnInit {
     this.transactionService.getTransactions(page, size, this.token!, params).subscribe({
       next: (response: any) => {
         this.transactions = response.data.docs;
-        this.filteredTransactions = [...this.transactions]; // Initialize filtered transactions
-        this.totalTransactions = response.data.totalDocs; // total count for pagination
-        this.calculateTotals(); // Calculate totals when transactions are fetched
-        this.loading = false;
+        this.filteredTransactions = [...this.transactions];
+        this.totalTransactions = response.data.totalDocs;
+        this.calculateTotals();
+        this.transactionService.toggleLoader(false);
       },
       error: (err) => {
         this.error = 'Failed to load transactions';
-        this.loading = false;
+        this.transactionService.toggleLoader(false);
       }
     });
   }
 
-
   applyFilters(): void {
-    // Reset current page to 1 when applying new filters
     this.currentPage = 1;
-    // Call fetchTransactions with updated filters
     this.fetchTransactions(this.currentPage, this.pageSize);
   }
-
 
   calculateTotals(): void {
     this.totalCredited = this.transactions
       .filter(transaction => transaction.amount > 0)
       .reduce((sum, transaction) => sum + transaction.amount, 0);
-
     this.totalDebited = this.transactions
       .filter(transaction => transaction.amount < 0)
       .reduce((sum, transaction) => sum + Math.abs(transaction.amount), 0);
   }
 
-
   onPageChange(event: PageEvent): void {
-    this.currentPage = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
+    this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.fetchTransactions(this.currentPage, this.pageSize);
   }

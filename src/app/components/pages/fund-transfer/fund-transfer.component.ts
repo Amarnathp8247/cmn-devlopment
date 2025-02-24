@@ -10,18 +10,19 @@ import { WalletServiceService } from 'src/app/services/wallet/wallet-service.ser
   templateUrl: './fund-transfer.component.html',
   styleUrls: ['./fund-transfer.component.scss']
 })
+
 export class FundTransferComponent {
   fundTransferForm: FormGroup;
   token: any;
   showPassword = false;
-  referralName:any = '';
-
+  referralName: any = '';
   page = 1;
   sizePerPage = 10;
   transactionType = 'FUND-TRANSFER';
   transactions: any = [];
-  totalTransactions: number = 0; 
+  totalTransactions: number = 0;
   loading = false;
+  totalInternalTransferBalance: any;
 
   constructor(
     private walletService: WalletServiceService,
@@ -39,21 +40,35 @@ export class FundTransferComponent {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('authToken');
-    this.fetchWalletTransactions(this.page, this.sizePerPage);
+    // this.fetchWalletTransactions(this.page, this.sizePerPage);
+    this.getUserData()
+  }
+
+  getUserData() {
+    this.authServices.toggleLoader(true);
+    this.authServices.getProfile(this.token).subscribe({
+      next: (response) => {
+        // this.userBlance = response.data.BUSDBalance
+        this.totalInternalTransferBalance = response.data.TRADEBalance
+        this.authServices.toggleLoader(false);
+      },
+      error: (error) => {
+        this.toastr.error('Failed to load profile information', 'Error');
+        this.authServices.toggleLoader(false);
+      }
+    });
   }
 
   fundTransfer() {
     if (this.fundTransferForm.valid) {
+      this.authServices.toggleLoader(true);
       const depositFormData = {
         amount: this.fundTransferForm.value.amount,
         referralCode: this.fundTransferForm.value.referralCode,
         password: this.fundTransferForm.value.password
       };
-
       this.walletService.fundTransferData(depositFormData, this.token).subscribe({
         next: (response) => {
-      
-          
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',
@@ -61,10 +76,12 @@ export class FundTransferComponent {
             timeOut: 3000,
             progressBar: true
           });
-
+          this.getUserData()
           this.fundTransferForm.reset()
+          this.authServices.toggleLoader(false);
         },
         error: (err) => {
+          this.authServices.toggleLoader(false);
           const errorMessage = err.error?.message || 'Error processing the transaction';
           this.toastr.error(errorMessage, '', {
             toastClass: 'toast-custom toast-error',
@@ -79,12 +96,11 @@ export class FundTransferComponent {
   }
 
   checkReferralCode() {
-    
     const referralCode = this.fundTransferForm.get('referralCode')?.value;
     this.authServices.getReferralInfo(referralCode).subscribe({
       next: (response: any) => {
         if (response.status) {
-          this.referralName = response.data.email
+          this.referralName = response.data.name
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',
@@ -92,8 +108,8 @@ export class FundTransferComponent {
             timeOut: 3000,
             progressBar: true
           });
-          this.fundTransferForm.reset()
-          this.fetchWalletTransactions(this.page, this.sizePerPage)
+          // this.fundTransferForm.reset()
+          // this.fetchWalletTransactions(this.page, this.sizePerPage)
           // Handle success, e.g., display referral data or store it for further use
         } else {
           this.toastr.error(response.message, '', {
@@ -103,12 +119,11 @@ export class FundTransferComponent {
             timeOut: 3000,
             progressBar: true
           });
-          
+
         }
       },
       error: (err) => {
         const errorMessage = err.error?.message || 'Error validating referral code';
-        
         this.toastr.error(errorMessage, '', {
           toastClass: 'toast-custom toast-error',
           positionClass: 'toast-bottom-center',
@@ -116,29 +131,9 @@ export class FundTransferComponent {
           timeOut: 3000,
           progressBar: true
         });
-        
+
       }
     });
   }
 
-  fetchWalletTransactions(page: number, sizePerPage: number) {
-    if (this.token) {
-      this.walletService.getWalletTransactions(page, sizePerPage, this.transactionType, this.token).subscribe({
-        next: (response) => {
-          this.transactions = response.data.docs; // Adjust based on your response structure
-          this.totalTransactions = response.total; // Assuming your response contains the total transaction count
-          console.log(this.transactions);
-        },
-        error: (error) => {
-          console.error('Error fetching wallet transactions:', error);
-        }
-      });
-    }
-  }
-
-  onPageChange(event: PageEvent): void {
-    this.page = event.pageIndex + 1; // MatPaginator pageIndex starts from 0
-    this.sizePerPage = event.pageSize;
-    this.fetchWalletTransactions(this.page, this.sizePerPage);
-  }
 }
