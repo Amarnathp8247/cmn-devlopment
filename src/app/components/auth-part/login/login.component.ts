@@ -14,10 +14,13 @@ export class LoginComponent implements OnInit {
   isPasswordVisible: boolean = false;
   isForgotPassword: boolean = false;  // Flag to toggle between login and forgot password forms
   loginForm: FormGroup; // Define the login form
+  changePasswordFormOTP: FormGroup; // Define the login form
   changePasswordForm: FormGroup;  // Define the forgot password form
+  changePassword: FormGroup;  // Define the forgot password form
   isOldPasswordVisible: boolean = false;
   isNewPasswordVisible: boolean = false;
   isConfirmPasswordVisible: boolean = false;
+  currentStep = 1; // Tracks the current step in the process
   token: any
   constructor(
     private fb: FormBuilder,
@@ -28,12 +31,23 @@ export class LoginComponent implements OnInit {
     // Initialize the login form with validation
     this.loginForm = this.fb.group({
       loginId: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]]
     });
     this.changePasswordForm = this.fb.group({
-      oldPassword: ['', [Validators.required, Validators.minLength(6)]],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      cnfPassword: ['', [Validators.required, Validators.minLength(6)]]
+      email: ['', [Validators.required, Validators.email]],
+
+
+    });
+    this.changePasswordFormOTP = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      otp: [''],
+
+    });
+    this.changePassword = this.fb.group({
+
+      newPassword: ['', [Validators.required]],
+      cnfPassword: ['', [Validators.required]],
+
     });
   }
 
@@ -65,8 +79,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      const loginData = this.loginForm.value;
-      this.authServices.login(loginData).subscribe({
+      const loginId = this.loginForm.value.loginId;
+      const password = this.loginForm.value.password;
+      
+      this.authServices.login(loginId , password ).subscribe({
         next: (response: any) => {
           const token = response.data.token;
           if (token) {
@@ -107,6 +123,9 @@ export class LoginComponent implements OnInit {
 
   showForgotPassword() {
     this.isForgotPassword = true;
+    this.currentStep = 2; // Move to OTP verification
+
+
   }
 
   toggleOldPasswordVisibility(): void {
@@ -125,11 +144,13 @@ export class LoginComponent implements OnInit {
     this.isForgotPassword = false;
   }
 
-  onForgotPasswordSubmit() {
+  sendOtp() {
     if (this.changePasswordForm.valid) {
-      const changePasswordData = this.changePasswordForm.value;
-      this.authServices.forgotPassword(changePasswordData, this.token).subscribe({
+      const email = this.changePasswordForm.value.email;
+      this.authServices.forgotLoginPassword(email).subscribe({
         next: (response: any) => {
+          this.isForgotPassword = false;
+          this.currentStep = 3; // Move to OTP verification
           this.toastr.success(response.message, '', {
             toastClass: 'toast-custom toast-success',
             positionClass: 'toast-bottom-center',
@@ -137,7 +158,7 @@ export class LoginComponent implements OnInit {
             timeOut: 3000,
             progressBar: true
           });
-          this.backToLogin(); // Go back to login form after password reset request
+        
         },
         error: (err) => {
           const errorMessage = err.error?.message || 'Something went wrong';
@@ -152,4 +173,73 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
+  dataToken: any
+  verifyOtp() {
+    const email = this.changePasswordForm.value.email;
+    const otp = this.changePasswordFormOTP.value.otp;
+    this.authServices.verifyOtp(email, otp).subscribe({
+      next: (response: any) => {
+        this.currentStep = 4; // Move to OTP verification
+        this.dataToken = response.data
+        this.toastr.success(response.message, '', {
+          toastClass: 'toast-custom toast-success',
+          positionClass: 'toast-bottom-center',
+          closeButton: false,
+          timeOut: 3000,
+          progressBar: true
+        });
+       
+      },
+      error: (err) => {
+        const errorMessage = err.error?.message || 'Something went wrong';
+        this.toastr.error(errorMessage, '', {
+          toastClass: 'toast-custom toast-error',
+          positionClass: 'toast-bottom-center',
+          closeButton: false,
+          timeOut: 3000,
+          progressBar: true
+        });
+      }
+    });
+  }
+
+  resetPassword() {
+    const newPassword = this.changePassword.value.newPassword;
+    const cnfPassword = this.changePassword.value.cnfPassword;
+  
+    if (newPassword !== cnfPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+  
+    this.authServices.resetPassword(newPassword, cnfPassword, this.dataToken).subscribe({
+      next: (response: any) => {
+        this.toastr.success(response.message, '', {
+          toastClass: 'toast-custom toast-success',
+          positionClass: 'toast-bottom-center',
+          closeButton: false,
+          timeOut: 3000,
+          progressBar: true
+        });
+  
+        // Refresh the page after the success message
+        setTimeout(() => {
+          window.location.reload(); // Refresh the entire page
+        }, 3000); // Adjust timeout to match your toast duration
+      },
+      error: (err) => {
+        const errorMessage = err.error?.message || 'Something went wrong';
+        this.toastr.error(errorMessage, '', {
+          toastClass: 'toast-custom toast-error',
+          positionClass: 'toast-bottom-center',
+          closeButton: false,
+          timeOut: 3000,
+          progressBar: true
+        });
+      }
+    });
+  }
+  
+
 }

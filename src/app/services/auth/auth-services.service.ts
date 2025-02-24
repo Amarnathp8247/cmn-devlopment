@@ -15,16 +15,74 @@ export class AuthServicesService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`${this.apiUrl}/user/auth/register`, userData, { headers });
   }
-  // Method to sign up a user
-  login(userData: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${this.apiUrl}/user/auth/login`, userData, { headers });
-  }
+ 
 
   forgotPassword(body: string, token: any): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': token, 'Content-Type': 'application/x-www-form-urlencoded' });
     return this.http.put<any>(`${this.apiUrl}/user/auth/change/password`, { body }, { headers });
   }
+
+
+
+
+
+
+
+
+  // forgotLoginPassword(body: string, token: any): Observable<any> {
+  //   const headers = new HttpHeaders({ 'Authorization': token, 'Content-Type': 'application/x-www-form-urlencoded' });
+  //   return this.http.put<any>(`${this.apiUrl}/user/auth/forgot/password/sendotp`, { body }, { headers });
+  // }
+
+ // Method to sign up a user
+ login(email: any , password:any): Observable<any> {
+
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+  });
+  const body = new URLSearchParams();
+  body.set('loginId', email);
+  body.set('password', password);
+  return this.http.post(`${this.apiUrl}/user/auth/login`, body.toString(), { headers });
+}
+
+  forgotLoginPassword(email: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+    body.set('email', email);
+    return this.http.post(`${this.apiUrl}/user/auth/forgot/password/sendotp`, body.toString(), { headers });
+  }
+
+  verifyOtp(email: string, otp: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+    body.set('email', email);
+    body.set('otp', otp);
+    return this.http.patch(`${this.apiUrl}/user/auth/forgot/password/verify/otp`, body.toString(), { headers });
+  }
+
+  resetPassword(newPassword: string, confirmPassword: string, token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: token, // Replace with actual token
+    });
+    const body = new URLSearchParams();
+    body.set('newPassword', newPassword);
+    body.set('cnfPassword', confirmPassword);
+    return this.http.put(`${this.apiUrl}/user/auth/reset/password`, body.toString(), { headers });
+  }
+
+
+
+
+
+
+
+  
 
   // Method to send OTP to email
   sendEmailOtp(email: string, mobile: string): Observable<any> {

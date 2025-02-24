@@ -58,7 +58,7 @@ export class DashboardComponent {
         this.totalInternalTransferBalance = response.data.TRADEBalance
         this.totalUnlockRewardBalnce = response.data.totalUnlockRewardBalnce
         this.totalReferralRewardBalance = response.data.totalReferralRewardBalance
-        // this.totalRewardBalance = response.data.totalRewardBalance
+        this.totalRewardBalance = response.data.totalTeamTurnoverBalance
         this.bondBalance = response.data.totalStakingRewardBalance
         // this.bondBalance = response.data.totalReferralRewardBalance
         this.refferalcode = response.data.referralCode

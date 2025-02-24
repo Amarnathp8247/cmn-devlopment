@@ -45,6 +45,7 @@ export class SignUpComponent {
   }
 
   ngOnInit() {
+    this.authServices.toggleLoader(false);
     const theme = localStorage.getItem('theme');
     // this.loginIdData = localStorage.getItem('loginId')
     if (theme === 'dark') {

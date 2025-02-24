@@ -19,7 +19,7 @@
                                     required />
                                 <div *ngIf="stakeForm.get('amount')?.invalid && (stakeForm.get('amount')?.touched || stakeForm.get('amount')?.dirty)"
                                     class="text-danger">
-                                    Amount is required and must be greater than 100.
+                                    Amount is required and must be greater than 50.
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block" [disabled]="stakeForm.invalid">
