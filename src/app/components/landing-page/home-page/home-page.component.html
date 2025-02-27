@@ -1,703 +1,359 @@
-<!-- Navbar Start -->
-<nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
-    <a routerLink="/" class="navbar-brand d-flex align-items-center">
-        <img src="assets/logo.png" alt="Logo" width="80" height="50" class="me-2">
-    </a>
-
-
-    <button class=" navbar-toggler btn btn-info" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse">
-        <i class="fa-solid fa-bars"></i> <!-- Font Awesome Icon -->
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto py-4 py-lg-0">
-            <a routerLink="/dashboard" class="nav-item nav-link active">Dashboard</a>
-            <a href="#about" class="nav-item nav-link">About</a>
-            <a href="#service" class="nav-item nav-link">Service</a>
-            <!-- <a href="#service" class="nav-item nav-link"></a>  -->
-            <a href="#contact" class="nav-item nav-link"> Contact</a>
-
-
-        </div>
-        <div class="nav-item">
-            <a routerLink="/login" class="btn btn-success">Login</a>
-            <!-- <a routerLink="/signup" class="btn btn-primary mx-4">SignUp</a> -->
-
-        </div>
-        <div class="nav-item ms-3">
-            <div class="float-md-end d-inline-block mt-2 cursor-pointer">
-                <span *ngIf="!isDarkMode" class="me-2">
-                    <i class="fa-solid fa-sun fs-2" (click)="toggleDarkMode(true)"></i>
-                </span>
-                <span *ngIf="isDarkMode">
-                    <i class="fa-regular fa-moon fs-2" (click)="toggleDarkMode(false)"></i>
-                </span>
-            </div>
+ <!-- Preloader -->
+ <!-- <div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <span></span>
+            <span></span>
         </div>
     </div>
-</nav>
+</div> -->
+<!-- /End Preloader -->
 
-<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-            <div class="container py-5">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6">
-                        <h1 class="display-4 mb-3 animated slideInDown">Secure Your Future with Gold Investments
-                        </h1>
-                        <p class="animated slideInDown">Secure your future with gold investments highlights the
-                            essential role
-                            of gold in protecting wealth. With Boost Bullion, clients gain access to ethical gold
-                            trading,
-                            ensuring a stable foundation for their financial future through trusted investment
-                            strategies.</p>
-                        <a href="#" class="btn btn-primary py-3 px-4 animated slideInDown">Explore More</a>
-                    </div>
-                    <div class="col-lg-6 animated fadeIn">
-                        <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;"
-                            src="assets/img/gold__trade.jpg" alt="Gold Investment Image 1">
-                    </div>
+<!-- Start Header Area -->
+<header class="header navbar-area">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="nav-inner">
+                    <!-- Start Navbar -->
+                    <nav class="navbar navbar-expand-lg">
+                        <a class="navbar-brand" >
+                            <img src="assets/images/logo/white-logo.svg" alt="Logo">
+                        </a>
+                        <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                            <ul id="nav" class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a href="index.html" class="active" aria-label="Toggle navigation">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="about-us.html" aria-label="Toggle navigation">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                                        data-bs-target="#submenu-1-1" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">Pages</a>
+                                    <ul class="sub-menu collapse" id="submenu-1-1">
+                                        <li class="nav-item"><a href="about-us.html">About Us</a></li>
+                                        <li class="nav-item"><a href="signin.html">Sign In</a></li>
+                                        <li class="nav-item"><a href="signup.html">Sign Up</a></li>
+                                        <li class="nav-item"><a href="reset-password.html">Reset Password</a>
+                                        <li class="nav-item"><a href="mail-success.html">Mail Success</a></li>
+                                        <li class="nav-item"><a href="404.html">404 Error</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                                        data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">Blog</a>
+                                    <ul class="sub-menu collapse" id="submenu-1-2">
+                                        <li class="nav-item"><a href="blog-grid.html">Blog Grid</a>
+                                        </li>
+                                        <li class="nav-item"><a href="blog-single.html">Blog Single</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="contact.html" aria-label="Toggle navigation">Contact</a>
+                                </li>
+                            </ul>
+                        </div> <!-- navbar collapse -->
+                        <div class="button">
+                            <button routerLink="/login" class="btn btn-primary">Get started</button>
+                        </div>
+                    </nav>
+                    <!-- End Navbar -->
                 </div>
             </div>
-        </div>
-         <!-- Slide 2 -->
-    <div class="carousel-item">
-        <div class="container-fluid hero-header py-5">
-            <div class="container py-5">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6">
-                        <h1 class="display-4 mb-3 animated slideInDown">Invest in Gold for Financial Stability</h1>
-                        <p class="animated slideInDown">Gain stability with Boost Bullion's ethical gold trading.
-                            Our clients
-                            enjoy secure, sustainable investments that contribute to a brighter financial future.
-                        </p>
-                        <a href="#" class="btn btn-primary py-3 px-4 animated slideInDown">Learn More</a>
-                    </div>
-                    <div class="col-lg-6 animated fadeIn">
-                        <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;"
-                            src="assets/img/slider_images5.jpg" alt="Gold Investment Image 2">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+</header>
+<!-- End Header Area -->
 
-   
-
-
-    <!-- Add more slides as needed -->
-</div>
-
-<!-- Carousel controls -->
-<button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-</button>
-<button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-</button>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <iframe
-                src="https://fxpricing.com/fx-widget/ticker-tape-widget.php?id=1,2,3,20,1984,1975&border=show&speed=50&click_target=blank&theme=light&tm-cr=FFFFFF&hr-cr=00000013&by-cr=28A745&sl-cr=DC3545&flags=circle&d_mode=compact-name&column=ask,bid,spread&lang=en&font=Arial, sans-serif"
-                width="100%" height="85" style="border: unset;"></iframe>
-            <div id="fx-pricing-widget-copyright"><span>Powered by </span><a href="https://fxpricing.com/"
-                    target="_blank">FX Pricing</a></div>
-            <style type="text/css">
-                #fx-pricing-widget-copyright {
-                    text-align: center;
-                    font-size: 13px;
-                    font-family: sans-serif;
-                    margin-top: 10px;
-                    margin-bottom: 10px;
-                    color: #9db2bd;
-                }
-
-                #fx-pricing-widget-copyright a {
-                    text-decoration: unset;
-                    color: #bb3534;
-                    font-weight: 600;
-                }
-            </style>
-
-        </div>
-    </div>
-</div>
-<!-- Header End -->
-
-
-
-
-
-<!-- Service Start -->
-
-<div class="container-xxl py-5 my-5">
-    <div class="container py-5">
-        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <h2 class="display-6">How to Join the Affiliate Program</h2>
-            <p class="text-primary fs-5 mb-5">At Boost Bullion, we pride ourselves on our wide array of services, which
-                include:</p>
-        </div>
-        <div class="row justify-content-between align-items-center">
-
-
-            <!-- Affiliate Program Steps -->
-            <div class="card col-lg-5 col-md-6 wow fadeInUp mt-4" data-wow-delay="0.1s">
-                <div class="service-item p-5">
-                    <h3 class="mb-3">1. Application Process</h3>
-                    <p>Fill out the online application form on our website. Provide basic information about yourself and
-                        your marketing experience.</p>
-                </div>
-            </div>
-            <div class="card col-lg-5 col-md-6 wow fadeInUp mt-4" data-wow-delay="0.2s">
-                <div class="service-item p-5">
-                    <h3 class="mb-3">2. Approval and Setup</h3>
-                    <p>Once your application is reviewed and approved, you will receive an affiliate account. Access
-                        your unique affiliate link and marketing resources.</p>
-                </div>
-            </div>
-            <div class="card col-lg-5 col-md-6 wow fadeInUp mt-4" data-wow-delay="0.3s">
-                <div class="service-item p-5">
-                    <h3 class="mb-3">3. Start Promoting</h3>
-                    <p>Use the marketing materials provided to promote Boost Bullion Gold Bonds through your website,
-                        blog, social media, or email campaigns.</p>
-                </div>
-            </div>
-            <div class="card col-lg-5 col-md-6 wow fadeInUp mt-4" data-wow-delay="0.4s">
-                <div class="service-item p-5">
-                    <h3 class="mb-3">4. Earn Commissions</h3>
-                    <p>Earn commissions on every successful investment through your referral, credited to your affiliate
-                        account and paid according to our schedule.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="container-xxl py-5 my-5">
-    <div class="container py-5">
-        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <h2 class="display-6">Forex Cross Rates</h2>
-        </div>
-        <div class="row justify-content-between align-items-center mt-3">
-
-
-            <div class="col-md-12">
-                <iframe
-                    src="https://fxpricing.com/fx-widget/market-currency-rates-widget.php?id=1,5,1984,13,20&click_target=blank&theme=light&tm-cr=FFFFFF&hr-cr=00000013&by-cr=28A745&sl-cr=DC3545&flags=circle&value_alignment=center&column=price,ask,bid,chg,chg_per,spread,time&lang=en&font=Arial, sans-serif"
-                    width="100%" height="290" style="border: 1px solid #eee;"></iframe>
-                <div id="fx-pricing-widget-copyright"><span>Powered by </span><a href="https://fxpricing.com/"
-                        target="_blank">FX Pricing</a></div>
-                <style type="text/css">
-                    #fx-pricing-widget-copyright {
-                        text-align: center;
-                        font-size: 13px;
-                        font-family: sans-serif;
-                        margin-top: 10px;
-                        margin-bottom: 10px;
-                        color: #9db2bd;
-                    }
-
-                    #fx-pricing-widget-copyright a {
-                        text-decoration: unset;
-                        color: #bb3534;
-                        font-weight: 600;
-                    }
-                </style>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
-<!-- About Start -->
-<div class="container-xxl py-5" id="about">
+<!-- Start Hero Area -->
+<section class="hero-area">
+    <img class="hero-shape" src="assets/images/hero/hero-shape.svg" alt="#">
     <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <img class="img-fluid" src="assets/img/about_image.webp" alt="" width="500" height="500">
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="h-100">
-                    <h1 class="display-6">About Us</h1>
-                    <p class="text-primary fs-5 mb-4">Boost Bullion Gold Trading Company</p>
-                    <p>Boost Bullion Gold Trading Company is a premier gold trading and investment firm dedicated to
-                        providing secure, transparent, and reliable access to the world of precious metals. With a
-                        strong foundation in ethical practices and a commitment to excellence, we specialize in the
-                        trading of gold bullion, offering a wide range of services tailored to meet the needs of
-                        institutional, corporate, and individual investors alike.</p>
-                    <div class="d-flex align-items-center mb-2">
-                        <i class="fa fa-check bg-light text-primary btn-sm-square rounded-circle me-3 fw-bold"></i>
-                        <span>Ethical practices and commitment to excellence</span>
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-12 col-12">
+                <div class="hero-content">
+                    <h4 class="wow fadeInUp" data-wow-delay=".2s">Start Envesting & Earn Money</h4>
+                    <h1 class="wow fadeInUp" data-wow-delay=".4s">Say goodbye
+                        to <br>idle
+                        <span>
+                            <img class="text-shape" src="assets/images/hero/text-shape.svg" alt="#">
+                            money.
+                        </span>
+                    </h1>
+                    <p class="wow fadeInUp" data-wow-delay=".6s">Invest your spare change in Bitcoin and save
+                        with<br> crypto to e arn interest in real time.
+                    </p>
+                    <div class="button wow fadeInUp" data-wow-delay=".8s">
+                        <a href="about-us.html" class="btn ">Discover More</a>
                     </div>
-                    <div class="d-flex align-items-center mb-2">
-                        <i class="fa fa-check bg-light text-primary btn-sm-square rounded-circle me-3 fw-bold"></i>
-                        <span>Specializing in gold bullion trading</span>
-                    </div>
-                    <div class="d-flex align-items-center mb-4">
-                        <i class="fa fa-check bg-light text-primary btn-sm-square rounded-circle me-3 fw-bold"></i>
-                        <span>Services for all types of investors</span>
-                    </div>
-                    <a class="btn btn-primary py-3 px-4" href="">Read More</a>
                 </div>
             </div>
-
-        </div>
-    </div>
-</div>
-<!-- About End -->
-
-
-
-
-
-<!-- Features Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <h2 class="display-6">Why Join Our Affiliate Program!</h2>
-            <p class="text-primary fs-5 mb-5">Unlock Opportunities with Boost Bullion</p>
-        </div>
-        <div class="card">
-            <div class=" row g-5">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="d-flex align-items-start">
-                        <img class="img-fluid flex-shrink-0" src="assets/img/icon-1.png" alt="">
-                        <div class="ps-4">
-                            <h3 class="mb-3">Competitive Commissions</h3>
-                            <p>Earn attractive commissions on every successful referral and investment made through your
-                                affiliate link.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="d-flex align-items-start">
-                        <img class="img-fluid flex-shrink-0" src="assets/img/icon-2.png" alt="">
-                        <div class="ps-4">
-                            <h3 class="mb-3">Exclusive Marketing Materials</h3>
-                            <p>Gain access to a range of high-quality marketing materials, including banners, brochures,
-                                and educational content.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="d-flex align-items-start">
-                        <img class="img-fluid flex-shrink-0" src="assets/img/icon-3.png" alt="">
-                        <div class="ps-4">
-                            <h3 class="mb-3">Training and Support</h3>
-                            <p>Receive comprehensive training on our products, sales techniques, and effective marketing
-                                strategies.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="d-flex align-items-start">
-                        <img class="img-fluid flex-shrink-0" src="assets/img/icon-4.png" alt="">
-                        <div class="ps-4">
-                            <h3 class="mb-3">Real-Time Tracking</h3>
-                            <p>Monitor your performance with our user-friendly dashboard that provides real-time
-                                tracking
-                                of clicks, conversions, and earnings.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="d-flex align-items-start">
-                        <img class="img-fluid flex-shrink-0" src="assets/img/icon-5.png" alt="">
-                        <div class="ps-4">
-                            <h3 class="mb-3">Access to Premium Investment Products</h3>
-                            <p>Promote our Gold Bonds, which offer competitive returns and a secure investment
-                                opportunity for clients.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="d-flex align-items-start">
-                        <img class="img-fluid flex-shrink-0" src="assets/img/icon-6.png" alt="">
-                        <div class="ps-4">
-                            <h3 class="mb-3">Network and Community</h3>
-                            <p>Join a community of like-minded affiliates who share tips, strategies, and
-                                experiences.</p>
-                        </div>
-                    </div>
+            <div class="col-lg-7 col-12">
+                <div class="hero-image">
+                    <img class="main-image" src="assets/images/hero/home2-bg.png" alt="#">
+                    <img class="h2-move-1" src="assets/images/hero/h2-bit-l.png" alt="#">
+                    <img class="h2-move-2" src="assets/images/hero/h2-bit-m.png" alt="#">
+                    <img class="h2-move-3" src="assets/images/hero/h2-bit-s.png" alt="#">
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-<!-- Features End -->
-
-
-<!-- Service Start -->
-<div class="container-xxl  py-5 my-5" id="service">
-    <div class="container py-5">
-        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <h2 class="display-6">What We Offer</h2>
-            <p class="text-primary fs-5 mb-5">At Boost Bullion, we pride ourselves on our wide array of services, which
-                include:</p>
-        </div>
-        <div class="row  justify-content-between align-items-center">
-            <div class="card col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item  p-5">
-                    <img class="img-fluid mb-4" src="assets/img/icon-1.png" alt="">
-                    <h3 class="mb-3">Gold Bullion Trading</h3>
-                    <p>We provide access to gold bars, coins, and other bullion products, helping clients diversify
-                        their portfolios and protect their wealth.</p>
-                    <a href="">Read More <i class="fa fa-arrow-right ms-2"></i></a>
-                </div>
-            </div>
-            <div class="card col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item  p-5">
-                    <img class="img-fluid mb-4" src="assets/img/icon-2.png" alt="">
-                    <h3 class="mb-3">Gold Lending and Leasing Solutions</h3>
-                    <p>Offering innovative financial services, we allow clients to leverage their gold holdings for
-                        liquidity while earning returns through our lending options.</p>
-                    <a href="">Read More <i class="fa fa-arrow-right ms-2"></i></a>
-                </div>
-            </div>
-            <div class="card col-lg-5 col-md-6 wow  mt-4 fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item  p-5">
-                    <img class="img-fluid mb-4" src="assets/img/icon-3.png" alt="">
-                    <h3 class="mb-3">Secure Storage and Custody</h3>
-                    <p>We offer safe, insured storage solutions for our clients’ bullion in top-tier vaults around the
-                        world, ensuring the highest levels of security.</p>
-                    <a href="">Read More <i class="fa fa-arrow-right ms-2"></i></a>
-                </div>
-            </div>
-            <div class="card col-lg-5 col-md-6  mt-4 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item  p-5">
-                    <img class="img-fluid mb-4" src="assets/img/icon-4.png" alt="">
-                    <h3 class="mb-3">Consultation and Advisory Services</h3>
-                    <p>Our experienced team of experts provides personalized investment advice and strategic insights
-                        into the bullion market, enabling clients to make informed decisions.</p>
-                    <a href="">Read More <i class="fa fa-arrow-right ms-2"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Service End -->
-
-
-<!-- Three-Card Slider Section Start -->
-<section>
-
-    <div class="container-xxl py-5 my-5">
-        <div class="container py-5">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h2 class="display-6">Investment Plans</h2>
-                <p class="text-primary fs-5 mb-5">Choose the best plan that fits your investment needs</p>
-            </div>
-            <div id="threeCardCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row justify-content-center pricing pricing-palden">
-                            <!-- Silver Plan - 6% -->
-                            <div class="col-md-4 mb-4">
-                                <div class="pricing-item features-item ja-animate" data-animation="move-from-bottom"
-                                    data-delay="item-0" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" height="100px" width="300px" viewBox="0 0 300 100"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-                                        <div class="pricing-price"><span class="pricing-currency">$</span>50 <span
-                                                class="pricing-period">- $499</span></div>
-                                        <h3 class="pricing-title">Silver Plan - 6% Monthly</h3>
-                                    </div>
-                                    <ul class="pricing-feature-list">
-                                        <li class="pricing-feature">Minimum Investment: $50</li>
-                                        <li class="pricing-feature">Maximum Investment: $499</li>
-                                        <li class="pricing-feature">Average Monthly Return: 6%</li>
-                                    </ul>
-                                    <button class="pricing-action">Choose plan</button>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row justify-content-center pricing pricing-palden">
-                            <!-- Gold Plan - 7% -->
-                            <div class="col-md-4 mb-4">
-                                <div class="pricing-item features-item ja-animate" data-animation="move-from-bottom"
-                                    data-delay="item-1" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" height="100px" width="300px" viewBox="0 0 300 100"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-                                        <div class="pricing-price"><span class="pricing-currency">$</span>500 <span
-                                                class="pricing-period">- $999</span></div>
-                                        <h3 class="pricing-title">Gold Plan &nbsp; - 7% Monthly</h3>
-                                    </div>
-                                    <ul class="pricing-feature-list">
-                                        <li class="pricing-feature">Minimum Investment: $500</li>
-                                        <li class="pricing-feature">Maximum Investment: $999</li>
-                                        <li class="pricing-feature">Average Monthly Return: 7%</li>
-                                    </ul>
-                                    <button class="pricing-action">Choose plan</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="carousel-item">
-                        <div class="row justify-content-center pricing pricing-palden">
-                            <!-- Diamond Plan - 8% -->
-                            <div class="col-md-4 mb-4">
-                                <div class="pricing-item features-item ja-animate" data-animation="move-from-bottom"
-                                    data-delay="item-2" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" height="100px" width="300px" viewBox="0 0 300 100"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-                                        <div class="pricing-price"><span class="pricing-currency">$</span>1000 <span
-                                                class="pricing-period">- $2999</span></div>
-                                        <h3 class="pricing-title">Diamond Plan - 8% Monthly</h3>
-                                    </div>
-                                    <ul class="pricing-feature-list">
-                                        <li class="pricing-feature">Minimum Investment: $1000</li>
-                                        <li class="pricing-feature">Maximum Investment: $2999</li>
-                                        <li class="pricing-feature">Average Monthly Return: 8%</li>
-                                    </ul>
-                                    <button class="pricing-action">Choose plan</button>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-
-                        <div class="row justify-content-center pricing pricing-palden">
-                            <!-- Platinum Plan - 9% -->
-                            <div class="col-md-4 mb-4">
-                                <div class="pricing-item features-item ja-animate" data-animation="move-from-bottom"
-                                    data-delay="item-3" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" height="100px" width="300px" viewBox="0 0 300 100"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-                                        <div class="pricing-price"><span class="pricing-currency">$</span>3000 <span
-                                                class="pricing-period">- $4999</span></div>
-                                        <h3 class="pricing-title">Platinum Plan - 10% Monthly</h3>
-                                    </div>
-                                    <ul class="pricing-feature-list">
-                                        <li class="pricing-feature">Minimum Investment: $3000</li>
-                                        <li class="pricing-feature">Maximum Investment: $4999</li>
-                                        <li class="pricing-feature">Average Monthly Return: 10%</li>
-                                    </ul>
-                                    <button class="pricing-action">Choose plan</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <div class="row justify-content-center pricing pricing-palden">
-                            <!-- Titanium Plan - 10% -->
-                            <div class="col-md-4 mb-4">
-                                <div class="pricing-item features-item ja-animate" data-animation="move-from-bottom"
-                                    data-delay="item-4" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" height="100px" width="300px" viewBox="0 0 300 100"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-                                        <div class="pricing-price"><span class="pricing-currency">$</span>5000 <span
-                                                class="pricing-period">unlimited</span></div>
-                                        <h3 class="pricing-title">Titanium Plan - 12% Monthly</h3>
-                                    </div>
-                                    <ul class="pricing-feature-list">
-                                        <li class="pricing-feature">Minimum Investment: $5000</li>
-                                        <li class="pricing-feature">Maximum Investment : Unlimited</li>
-                                        <li class="pricing-feature">Average Monthly Return: 12%</li>
-                                    </ul>
-                                    <button class="pricing-action">Choose plan</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#threeCardCarousel"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#threeCardCarousel"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-
 </section>
-<!-- Three-Card Slider Section End -->
-
-
-
-
-
-
-
-<div class="container-xxl  py-5 my-5" id="contact">
-    <div class="container py-5">
-        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <h1 class="display-6">Contact Us</h1>
-            <p class="text-primary fs-5 mb-5">We’d love to hear from you! Fill out the form below to get in touch with
-                us.</p>
+<!-- End Hero Area -->
+<!-- About the Company Section -->
+<section class="call-action mt-5">
+    <div class="container">
+       <div class="inner-content">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-12 col-12">
+                <div class="text">
+                    <h3 class="mb-3"><i class="fas fa-building me-2"></i> About Our Company</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> We are dedicated to providing top-notch solutions for all your digital needs.</li>
+                        <li class="mb-2"><i class="fas fa-users me-2 text-primary"></i> Our team of experts is committed to delivering innovative services tailored to your requirements.</li>
+                        <li class="mb-2"><i class="fas fa-chart-line me-2 text-primary"></i> With years of experience, we empower businesses with reliable, scalable, and efficient digital solutions.</li>
+                        <li class="mb-2"><i class="fas fa-link me-2 text-primary"></i> Our mission is to bridge the gap between technology and business, ensuring seamless integration and growth.</li>
+                        <li class="mb-2"><i class="fas fa-graduation-cap me-2 text-primary"></i> We believe in continuous learning and adapting to the latest technological trends.</li>
+                        <li class="mb-2"><i class="fas fa-bullseye me-2 text-primary"></i> Whether it's web development, marketing, or branding, we are here to help you succeed.</li>
+                    </ul>
+                    <a href="about-us.html" class="btn btn-primary p-3 mt-3"><i class="fas fa-info-circle me-2"></i> Learn More</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-12">
+                <div class="about-image">
+                    <img src="assets/images/aboutusImage.jpg" alt="About Company" width="350"  height="300">
+                </div>
+            </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <form>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="email" class="form-control" placeholder="Your Email" required>
-                        </div>
-                        <div class="col-12">
-                            <input type="text" class="form-control" placeholder="Subject" required>
-                        </div>
-                        <div class="col-12">
-                            <textarea class="form-control" rows="5" placeholder="Message" required></textarea>
-                        </div>
-                        <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-primary py-3 px-4">Send Message</button>
-                        </div>
+       </div>
+    </div>
+</section>
+<!-- End About the Company Section -->
+<!-- Start Feature Area -->
+<div class="feature section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h3 class="wow zoomIn" data-wow-delay=".2s">Why choose us</h3>
+                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Our features</h2>
+                    <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
+                        Ipsum available, but the majority have suffered alteration in some form.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".2s">
+                <div class="feature-box">
+                    <div class="tumb">
+                        <img src="assets/images/features/feature-icon-1.png" alt="">
+                    </div>
+                    <h4 class="text-title">Instant Exchage</h4>
+                    <p>Invest in Bitcoin on the regular or save with one of the highest interest rates on the
+                        market.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".4s">
+                <div class="feature-box">
+                    <div class="tumb">
+                        <img src="assets/images/features/feature-icon-2.png" alt="">
+                    </div>
+                    <h4 class="text-title">Safe & Secure</h4>
+                    <p>Invest in Bitcoin on the regular or save with one of the highest interest rates on the
+                        market.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".6s">
+                <div class="feature-box">
+                    <div class="tumb">
+                        <img src="assets/images/features/feature-icon-3.png" alt="">
+                    </div>
+                    <h4 class="text-title">Instant Trading</h4>
+                    <p>Invest in Bitcoin on the regular or save with one of the highest interest rates on the
+                        market.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Features Area -->
+
+<!-- Start Call Action Area -->
+<section class="call-action">
+    <div class="container">
+        <div class="inner-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-7 col-12">
+                    <div class="text ">
+                        <h2 style="color: white !important;">You are using free
+                            <br> <span style="color: white !important;">Lite version of CryptoLand.</span>
+                        </h2>
+                        <p style="display: block;margin-top: 10px; color: white !important">Please, purchase full version of the template to
+                            get all pages,
+                            features and commercial license. </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-5 col-12">
+                    <div class="button">
+                        <a href="#" class="btn">Buy Pro Version
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Call Action Area -->
+
+
+<section class="feature section">
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-12">
+                <div class="section-title">
+                    <h3 class="wow zoomIn" data-wow-delay=".2s">Contact Us</h3>
+                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Get in Touch</h2>
+                    <p class="wow fadeInUp" data-wow-delay=".6s">We'd love to hear from you! Reach out to us for any queries or assistance.</p>
+                </div>
+            </div>
+           
+        </div>
+     <div class="container-fluid">
+        <div class="row justify-content-center" style="background-color: #F0B90B; padding: 40px; border-radius: 20px;">
+            <div class="col-lg-5 col-md-12 col-12">
+                <form class="contact-form">
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <div class="button">
+                        <button type="submit" class="btn">Send Message</button>
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Footer Start -->
-<div class="container-fluid footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5">
-            <!-- About Section -->
-            <div class="col-lg-4 col-md-6">
-                <h2 class="text-primary mb-4">
-                    <img class="img-fluid me-2" src="assets/logo.png" alt="Logo" width="80" height="80">
-                    Gold Trading
-                </h2>
-                <p>"Boost Bullion provides secure and reliable gold trading services, investment solutions, and market
-                    insights. Explore our range of precious metals, real-time pricing, and expert guidance for safe and
-                    profitable investments."</p>
-            </div>
-            <!-- Newsletter Section -->
-            <div class="col-lg-4 col-md-6">
-                <h3 class="mb-4">Newsletter</h3>
-                <p>Stay updated with our latest news and offerings.</p>
-                <div class="position-relative">
-                    <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="email"
-                        placeholder="Your email">
-                    <button type="button" class="btn btn-primary py-2 px-3 position-absolute top-0 end-0 mt-2 me-2">Sign
-                        Up</button>
+            <div class="col-lg-4 mx-5 col-md-12 col-12">
+                <div class="contact-info">
+                    <h4>Contact Information</h4>
+                    <p>Email: contact@company.com</p>
+                    <p>Phone: +123 456 7890</p>
+                    <p>Address: 123 Business Street, City, Country</p>
                 </div>
             </div>
-            <!-- Social Media -->
-            <div class="col-lg-3 col-md-6">
-                <h3 class="mb-4">Follow Us</h3>
-                <div class="d-flex">
-                    <a href="" class="btn btn-outline-primary rounded-circle me-1"><i class="fab fa-twitter"></i></a>
-                    <a href="" class="btn btn-outline-primary rounded-circle me-1"><i class="fab fa-facebook-f"></i></a>
-                    <a href="" class="btn btn-outline-primary rounded-circle me-1"><i class="fab fa-youtube"></i></a>
-                    <a href="" class="btn btn-outline-primary rounded-circle me-1"><i
-                            class="fab fa-linkedin-in"></i></a>
+        </div>
+     </div>
+    </div>
+</section>
+
+<!-- Start Footer Area -->
+<footer class="footer section">
+    <!-- Start Footer Top -->
+    <div class="footer-top">
+        <div class="container">
+            <div class="inner-content">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-about">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="assets/images/logo/white-logo.svg" alt="#">
+                                </a>
+                            </div>
+                            <p>Making the world a better place through constructing elegant hierarchies.</p>
+                            <h4 class="social-title">Follow Us On:</h4>
+                            <ul class="social">
+                                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-pinterest"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-link">
+                            <h3>Solutions</h3>
+                            <ul>
+                                <li><a href="javascript:void(0)">Marketing</a></li>
+                                <li><a href="javascript:void(0)">Analytics</a></li>
+                                <li><a href="javascript:void(0)">Commerce</a></li>
+                                <li><a href="javascript:void(0)">Insights</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-link">
+                            <h3>Support</h3>
+                            <ul>
+                                <li><a href="javascript:void(0)">Pricing</a></li>
+                                <li><a href="javascript:void(0)">Documentation</a></li>
+                                <li><a href="javascript:void(0)">Guides</a></li>
+                                <li><a href="javascript:void(0)">API Status</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer newsletter">
+                            <h3>Subscribe</h3>
+                            <p>Subscribe to our newsletter for the latest updates</p>
+                            <form action="#" method="get" target="_blank" class="newsletter-form">
+                                <input name="EMAIL" placeholder="Email address" required="required" type="email">
+                                <div class="button">
+                                    <button class="sub-btn"><i class="lni lni-envelope"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
+    <!--/ End Footer Top -->
+    <!-- Start Copyright Area -->
+    <div class="copyright-area">
+        <div class="container">
+            <div class="inner-content">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <p class="copyright-text">© 2023 CryptoLand - All Rights Reserved</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <p class="copyright-owner">Designed and Developed by <a href="https://uideck.com/"
+                                rel="nofollow" target="_blank">UIdeck</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Copyright Area -->
+</footer>
+<!--/ End Footer Area -->
 
-</div>
-
-<!-- Footer End -->
-
-
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top float-end"><i
-        class="bi bi-arrow-up"></i></a>
+<!-- ========================= scroll-top ========================= -->
+<a href="#" class="scroll-top">
+    <i class="lni lni-chevron-up"></i>
+</a>
